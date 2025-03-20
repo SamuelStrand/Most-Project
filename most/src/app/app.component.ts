@@ -1,12 +1,17 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  template: `
+    <nav>
+      <a routerLink="/home">Home</a>
+      <a routerLink="/about">About</a>
+    </nav>
+    <router-outlet></router-outlet>
+  `,
+  standalone: true,
+  imports: [RouterOutlet, RouterModule, CommonModule]
 })
-export class AppComponent {
-  title = 'most';
-}
+export class AppComponent {}
