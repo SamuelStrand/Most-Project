@@ -4,14 +4,17 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, RouterModule, CommonModule],
   template: `
     <nav>
-      <a routerLink="/home">Home</a>
-      <a routerLink="/about">About</a>
+      <div class="header">
+        <a routerLink="/home">Home</a>
+        <a routerLink="/about">About</a>
+      </div>
     </nav>
+    <hr />
     <router-outlet></router-outlet>
   `,
-  standalone: true,
-  imports: [RouterOutlet, RouterModule, CommonModule]
 })
 export class AppComponent {}
