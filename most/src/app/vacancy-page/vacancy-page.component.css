@@ -1,0 +1,82 @@
+.vacancy-detail {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+.vacancy-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.vacancy-header h2 {
+  color: #333;
+  margin: 0;
+}
+
+.favorite {
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.favorite.active {
+  color: red;
+}
+
+.vacancy-info p {
+  font-size: 16px;
+  margin: 8px 0;
+  color: #555;
+}
+
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.apply-btn {
+  width: 100%;
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+.apply-btn:hover {
+  background-color: #0056b3;
+}
+
+button[routerLink] {
+  background-color: #28a745;
+  color: white;
+}
+
+button[routerLink]:hover {
+  background-color: #218838;
+}
+
+button.delete-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+button.delete-btn:hover {
+  background-color: #c82333;
+}

@@ -1,0 +1,30 @@
+<div class="create-vacancy">
+  <h2>Create a New Vacancy</h2>
+  <form (ngSubmit)="submitVacancy()">
+    <label for="name">Vacancy Name</label>
+    <input id="name" [(ngModel)]="newVacancy.name" name="name" required />
+
+    <label for="salary">Salary</label>
+    <input id="salary" [(ngModel)]="newVacancy.salary" name="salary" required />
+
+    <label for="payments">Payments</label>
+    <input id="payments" [(ngModel)]="newVacancy.Payments" name="payments" />
+
+    <label for="workexp">Work Experience</label>
+    <input id="workexp" [(ngModel)]="newVacancy.workexp" name="workexp" />
+
+    <label for="whours">Work Hours</label>
+    <input id="whours" type="number" [(ngModel)]="newVacancy.whours" name="whours" />
+
+    <label for="imageUrl">Image URL</label>
+    <input id="imageUrl" [(ngModel)]="newVacancy.imageUrl" name="imageUrl" />
+
+    <label for="wformat">Work Format</label>
+    <select id="wformat" [(ngModel)]="newVacancy.wformat" name="wformat">
+      <option value="offline">Offline</option>
+      <option value="remote">Remote</option>
+    </select>
+
+    <button type="submit">Create Vacancy</button>
+  </form>
+</div>
