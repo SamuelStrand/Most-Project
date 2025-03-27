@@ -8,6 +8,8 @@ import { RegisterComponent } from './register/register.component';
 import { CreateVacancyComponent } from './create-vacancy/create-vacancy.component';
 import { EditVacancyComponent } from './edit-vacancy/edit-vacancy.component';
 import { FavoritesComponent } from './favorites/favorites.component';
+import { ApplicationsComponent } from './applications/applications.component';
+
 
 
 
@@ -25,7 +27,9 @@ export const routes: Routes = [
   {path: 'login',component: LoginComponent},
   {path: 'register',component: RegisterComponent},
   { path: 'create-vacancy', component: CreateVacancyComponent },
-  { path: 'edit-vacancy/:id', component: EditVacancyComponent }
+  { path: 'edit-vacancy/:id', component: EditVacancyComponent },
+  { path: 'applications', component: ApplicationsComponent }
+
 
 
 

@@ -13,9 +13,12 @@
     <p><strong>Work Format:</strong> {{ vacancy.wformat }}</p>
     <button [routerLink]="['/edit-vacancy', vacancy.id]">✏ Edit</button>
     <button class="delete-btn" (click)="deleteVacancy()">🗑 Delete</button>
-
-
   </div>
 
-  <button class="apply-btn">🚀 Apply Now</button>
+  <button class="apply-btn"
+          (click)="applyForVacancy()"
+          [disabled]="hasApplied"
+          [class.applied]="hasApplied">
+    🚀 {{ hasApplied ? 'Applied' : 'Apply Now' }}
+  </button>
 </div>
