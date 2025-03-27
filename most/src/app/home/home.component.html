@@ -1,1 +1,34 @@
-<p>home works!</p>
+<app-search></app-search>
+<ul>
+    <li *ngFor="let vacancy of vacancies">
+        <a routerLink="/vacancy/{{vacancy.id}}">
+            <div class="content">
+                <div class="name">
+                    {{vacancy.name}}
+                </div>
+                <span class="favorite {{vacancy.favorite?'':'not'}}" >
+                    ❤️
+                </span>
+                <div class="salary">
+                    {{vacancy.salary}}
+                </div>
+                <div class="payments">
+                    <span>Payments:</span>{{vacancy.Payments}}
+                </div>
+                <div class="workexp">
+                    <span>Work experience:</span>{{vacancy.workexp}}
+                </div>
+                <div class="schedule">
+                    <span>Full-time employment
+                        Schedule:</span>{{vacancy.schedule}}
+                </div>
+                <div class="whours">
+                    <span>Working hours:</span>{{vacancy.whours}}
+                </div>
+                <div class="wformat">
+                    <span>Work format:</span>{{vacancy.wformat}}
+                </div>
+            </div>
+        </a>
+    </li>
+</ul>
