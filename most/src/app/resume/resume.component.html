@@ -1,7 +1,6 @@
 <div class="resume-container">
     <h1>Мои резюме</h1>
 
-    <!-- Перебираем все резюме -->
     <div *ngFor="let resume of resumes">
         <div class="profile-card">
             <div class="profile-info">
@@ -31,7 +30,6 @@
         </div>
     </div>
 
-    <!-- Кнопки управления -->
     <button (click)="addResume()">➕ Добавить резюме</button>
     <input type="text" [(ngModel)]="newRole" placeholder="Введите роль" />
 

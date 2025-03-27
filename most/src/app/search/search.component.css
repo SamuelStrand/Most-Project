@@ -1,7 +1,7 @@
 .search-container {
   display: flex;
   align-items: center;
-  width: 100%; 
+  width: 100%;
   max-width: 400px;
   margin: 0 auto;
   padding: 5px;
@@ -30,6 +30,8 @@
   transition: background 0.3s ease;
   margin-left: 10px;
   white-space: nowrap;
+
+}
 
 .search-container button:hover {
   background-color: #0056b3;
