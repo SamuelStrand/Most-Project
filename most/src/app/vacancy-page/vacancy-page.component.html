@@ -1,9 +1,17 @@
-<div class="container">
-<div class="details">
-    <div class="header">
-        <span class="name">
-            {{vacancy.name}}
-        </span>
-    </div>
-</div>
+<div class="vacancy-detail">
+  <div class="vacancy-header">
+    <h2>{{ vacancy.name }}</h2>
+    <span class="favorite {{vacancy.favorite ? 'active' : ''}}">❤️</span>
+  </div>
+
+  <div class="vacancy-info">
+    <p><strong>Salary:</strong> {{ vacancy.salary }}</p>
+    <p><strong>Payments:</strong> {{ vacancy.Payments }}</p>
+    <p><strong>Work Experience:</strong> {{ vacancy.workexp }}</p>
+    <p><strong>Schedule:</strong> {{ vacancy.schedule }} days on / off</p>
+    <p><strong>Working Hours:</strong> {{ vacancy.whours }} hours per day</p>
+    <p><strong>Work Format:</strong> {{ vacancy.wformat }}</p>
+  </div>
+
+  <button class="apply-btn">Apply Now</button>
 </div>

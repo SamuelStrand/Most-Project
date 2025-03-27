@@ -1,49 +1,59 @@
-ul {
-    display: grid;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    list-style-type: none;
-    padding: 0;
+.vacancies-list {
+  list-style: none;
+  padding: 0;
+  max-width: 800px;
+  margin: 20px auto;
 }
 
-li a {
-    height: 20rem;
-    width: 20rem;
-    border: 1px solid whitesmoke;
-    border-radius: 1rem;
-    margin: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    text-decoration: none;
-    position: relative;
+.vacancy-item {
+  background: #fffaf0;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
 }
 
-li a:hover {
-    opacity: 0.9;
-    cursor: pointer;
+.vacancy-item:hover {
+  transform: scale(1.02);
 }
 
-.content {
-    padding: 2rem 1rem;
-    position: relative;
+.vacancy-item a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
 
 .name {
-    padding-top: 1rem;
-    font-size: 1.8rem;
-    font-weight:700;
-    text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+
+.salary {
+  font-size: 16px;
+  font-weight: bold;
+  color: #007bff;
+  margin: 5px 0;
+}
+
+.details {
+  font-size: 14px;
+  color: #555;
+  margin-top: 10px;
+}
+
+.details div {
+  margin-bottom: 5px;
 }
 
 .favorite {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    font-size: 1.5rem;
+  float: right;
+  font-size: 20px;
+  cursor: pointer;
 }
 
-.favorite.not{
-    color:grey;
+.favorite.not {
+  color: #ccc;
 }
