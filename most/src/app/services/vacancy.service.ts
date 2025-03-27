@@ -79,8 +79,28 @@ export class VacancyService {
       wformat: 'offline'
     }
   ];
-
-  constructor() {}
+  toggleFavorite(id: number): void {
+    const vacancy = this.vacancies.find(v => v.id === id);
+    if (vacancy) {
+      vacancy.favorite = !vacancy.favorite;
+      this.saveToLocalStorage();
+    }
+  }
+  getFavorites(): Vacancy[] {
+    return this.vacancies.filter(v => v.favorite);
+  } 
+  getVacancies(): Vacancy[] {
+    return this.vacancies;
+  }
+  private saveToLocalStorage(): void {
+    localStorage.setItem('vacancies', JSON.stringify(this.vacancies));
+  }
+  constructor() { 
+    const saved = localStorage.getItem('vacancies');
+    if (saved) {
+      this.vacancies = JSON.parse(saved);
+    }
+  }
 
   getVacancyById(id: number): Vacancy {
     return this.vacancies.find(vacancy => vacancy.id === id)!;

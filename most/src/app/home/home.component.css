@@ -52,8 +52,14 @@
   float: right;
   font-size: 20px;
   cursor: pointer;
+  color: #ccc;
+  transition: all 0.3s;
 }
 
-.favorite.not {
-  color: #ccc;
+.favorite.active {
+  color: red;
+}
+
+.favorite:hover {
+  transform: scale(1.1);
 }

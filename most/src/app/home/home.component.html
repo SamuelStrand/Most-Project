@@ -5,7 +5,8 @@
       <div class="content">
         <div class="name">{{ vacancy.name }}</div>
 
-        <span class="favorite {{ vacancy.favorite ? '' : 'not' }}">
+        <span class="favorite {{ vacancy.favorite ? 'active' : '' }}" 
+              (click)="toggleFavorite(vacancy.id, $event)">
           ❤️
         </span>
 

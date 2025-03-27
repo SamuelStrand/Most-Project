@@ -20,7 +20,10 @@ export class HomeComponent implements OnInit {
     private vacancyService: VacancyService,
     private route: ActivatedRoute
   ) {}
-
+  toggleFavorite(id: number, event: Event): void {
+    event.stopPropagation();
+    this.vacancyService.toggleFavorite(id);
+  }
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       if (params['searchTerm']) {
