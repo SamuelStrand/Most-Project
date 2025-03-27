@@ -5,6 +5,8 @@ import { VacancyPageComponent } from './vacancy-page/vacancy-page.component';
 import { ResumeComponent } from './resume/resume.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { CreateVacancyComponent } from './create-vacancy/create-vacancy.component';
+
 
 
 
@@ -18,6 +20,8 @@ export const routes: Routes = [
   {path: 'vacancy/:id', component: VacancyPageComponent},
   {path: 'login',component: LoginComponent},
   {path: 'register',component: RegisterComponent},
+  { path: 'create-vacancy', component: CreateVacancyComponent },
+
 
 
 
