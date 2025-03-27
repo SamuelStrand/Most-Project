@@ -1,42 +1,39 @@
 <div class="resume-container">
     <h1>Мои резюме</h1>
 
-    <div class="profile-card">
-        <div class="profile-info">
-            <img src="https://img.hhcdn.ru/photo/758969793.jpeg?t=1742555175&h=OAWoO4HqpncviuaqLoxiyQ"
-                alt="Profile Picture" class="profile-pic">
-            <div>
-                <h3>{{ profile.name }}</h3>
-                <p>Ваш статус на hh.kz: <b>{{ profile.status }}</b></p>
+    <!-- Перебираем все резюме -->
+    <div *ngFor="let resume of resumes">
+        <div class="profile-card">
+            <div class="profile-info">
+                <img src="https://www.shutterstock.com/image-photo/head-shot-portrait-close-smiling-600nw-1714666150.jpg"
+                    alt="Profile Picture" class="profile-pic">
+                <div>
+                    <h3>{{ resume.name }}</h3>
+                    <p>Ваш статус на hh.kz: <b>{{ resume.status }}</b></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="resume-details">
+            <h2>{{ resume.role }}</h2>
+            <p>Обновлено {{ resume.lastUpdated }}</p>
+
+            <div class="stats">
+                <p>📊 Статистика за неделю</p>
+                {{ resume.stats.shows }} показов | {{ resume.stats.views }} просмотров | {{ resume.stats.invites }} приглашений
+            </div>
+
+            <div class="actions">
+                <button (click)="updateResume(resume.id)">🔼 Поднять в поиске</button>
+                <button (click)="deleteResume(resume.id)">🗑 Удалить</button>
+                <span>{{ resume.vacancies }} вакансий</span>
             </div>
         </div>
     </div>
 
-    <div class="response-card">
-        <p>✅ Вы откликнулись <b>{{ profile.responses }}</b> раз</p>
-        <p>Вероятность получить отклики возросла. Продолжайте в том же духе</p>
-        <a href="#">Перейти к вакансиям</a>
-    </div>
+    <!-- Кнопки управления -->
+    <button (click)="addResume()">➕ Добавить резюме</button>
+    <input type="text" [(ngModel)]="newRole" placeholder="Введите роль" />
 
-    <div class="resume-details">
-        <h2>{{ profile.role }}</h2>
-        <p>Обновлено {{ profile.lastUpdated }}</p>
-
-        <div class="stats">
-            <p>📊 Статистика за неделю</p>
-            <p>{{ profile.stats.shows }} показов | {{ profile.stats.views }} просмотров | {{ profile.stats.invites }}
-                приглашений</p>
-        </div>
-
-        <div class="actions">
-            <button class="btn-primary">🔼 Поднять в поиске</button>
-            <span>{{ profile.vacancies }} вакансий</span>
-        </div>
-
-        <div class="links">
-            <a href="#">Изменить видимость</a> |
-            <a href="#">Редактировать</a> |
-            <a href="#">Дублировать</a>
-        </div>
-    </div>
+    <button (click)="loadAllResumes()">📂 Получить все резюме</button>
 </div>

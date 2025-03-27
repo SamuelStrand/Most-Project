@@ -1,21 +1,11 @@
 import { Component } from '@angular/core';
 import { RouterOutlet,RouterModule } from '@angular/router';
-import { ResumeComponent } from './resume/resume.component';
+import { HeaderComponent } from './header/header.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ResumeComponent, RouterModule],
+  imports: [RouterOutlet, RouterModule, HeaderComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
-  template: `
-  <nav>
-    <div class="header">
-      <a routerLink="/home">Home</a>
-      <a routerLink="/about">About</a>
-    </div>
-  </nav>
-  <hr />
-  <router-outlet></router-outlet>
-`,
+  styleUrl: './app.component.css'
 })
 export class AppComponent {}
