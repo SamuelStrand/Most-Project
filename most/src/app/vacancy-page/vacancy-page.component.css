@@ -1,65 +1,82 @@
 .vacancy-detail {
   max-width: 600px;
   margin: 40px auto;
-  background: white;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  background-color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
 }
 
 .vacancy-header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-}
-
-.vacancy-header img {
-  width: 80px;
-  height: 80px;
-  border-radius: 10px;
+  align-items: center;
 }
 
 .vacancy-header h2 {
-  flex-grow: 1;
-  margin: 0 10px;
-  font-size: 24px;
+  color: #333;
+  margin: 0;
 }
 
 .favorite {
   font-size: 24px;
   cursor: pointer;
-  opacity: 0.5;
-  transition: opacity 0.3s;
+  transition: color 0.3s ease;
 }
 
 .favorite.active {
-  opacity: 1;
-}
-
-.vacancy-info {
-  text-align: left;
-  margin-top: 20px;
+  color: red;
 }
 
 .vacancy-info p {
   font-size: 16px;
-  margin: 5px 0;
+  margin: 8px 0;
+  color: #555;
+}
+
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  opacity: 0.8;
 }
 
 .apply-btn {
-  margin-top: 20px;
   width: 100%;
-  padding: 10px;
-  font-size: 18px;
-  background: #007bff;
+  background-color: #007bff;
   color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s ease;
+  font-weight: bold;
 }
 
 .apply-btn:hover {
-  background: #0056b3;
+  background-color: #0056b3;
+}
+
+button[routerLink] {
+  background-color: #28a745;
+  color: white;
+}
+
+button[routerLink]:hover {
+  background-color: #218838;
+}
+
+button.delete-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+button.delete-btn:hover {
+  background-color: #c82333;
 }

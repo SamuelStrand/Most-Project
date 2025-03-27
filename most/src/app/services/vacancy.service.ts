@@ -94,4 +94,18 @@ export class VacancyService {
     newVacancy.id = this.vacancies.length + 1;
     this.vacancies.push(newVacancy);
   }
+
+
+  deleteVacancy(id: number): void {
+    this.vacancies = this.vacancies.filter(vacancy => vacancy.id !== id);
+  }
+
+  updateVacancy(updatedVacancy: Vacancy): boolean {
+    const index = this.vacancies.findIndex(v => v.id === updatedVacancy.id);
+    if (index !== -1) {
+      this.vacancies[index] = updatedVacancy;
+      return true;
+    }
+    return false;
+  }
 }

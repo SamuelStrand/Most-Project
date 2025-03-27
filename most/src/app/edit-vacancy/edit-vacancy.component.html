@@ -1,0 +1,26 @@
+<div class="edit-vacancy-container">
+  <h2>Редактирование вакансии</h2>
+
+  <label>Название:</label>
+  <input [(ngModel)]="vacancy.name" type="text" />
+
+  <label>Зарплата:</label>
+  <input [(ngModel)]="vacancy.salary" type="text" />
+
+  <label>Выплаты:</label>
+  <input [(ngModel)]="vacancy.Payments" type="text" />
+
+  <label>Опыт работы:</label>
+  <input [(ngModel)]="vacancy.workexp" type="text" />
+
+  <label>Часы работы:</label>
+  <input [(ngModel)]="vacancy.whours" type="number" />
+
+  <label>График:</label>
+  <input [(ngModel)]="vacancy.schedule" type="text" />
+
+  <label>Формат работы:</label>
+  <input [(ngModel)]="vacancy.wformat" type="text" />
+
+  <button (click)="saveVacancy()">Сохранить</button>
+</div>
