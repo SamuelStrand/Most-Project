@@ -1,0 +1,14 @@
+<div class="register-container">
+  <h2>Регистрация аккаунта</h2>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <input type="text" formControlName="name" placeholder="Имя" required />
+    <input type="email" formControlName="email" placeholder="Email" required />
+    <input type="password" formControlName="password" placeholder="Пароль" required />
+    <input type="password" formControlName="confirmPassword" placeholder="Повторите пароль" required />
+
+    <button type="submit" class="register-button">Зарегистрироваться</button>
+  </form>
+
+  <p class="login-link">Уже есть аккаунт? <a href="/login">Войдите здесь</a></p>
+</div>

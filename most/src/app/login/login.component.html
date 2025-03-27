@@ -1,0 +1,12 @@
+<div class="login-container">
+  <h2>Вход</h2>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <input type="email" formControlName="email" placeholder="Email" required />
+    <input type="password" formControlName="password" placeholder="Пароль" required />
+
+    <button type="submit" class="login-button">Войти</button>
+  </form>
+
+  <p class="register-link">Нет аккаунта? <a href="/register">Зарегистрируйтесь</a></p>
+</div>
