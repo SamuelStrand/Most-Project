@@ -1,0 +1,13 @@
+<div class="applications">
+  <h2>My Applications</h2>
+  <ul *ngIf="applications.length > 0; else noApplications">
+    <li *ngFor="let app of applications">
+      <h3>{{ app.name }}</h3>
+      <p><strong>Salary:</strong> {{ app.salary }}</p>
+    </li>
+  </ul>
+
+  <ng-template #noApplications>
+    <p>You haven't applied for any jobs yet.</p>
+  </ng-template>
+</div>

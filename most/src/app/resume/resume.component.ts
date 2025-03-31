@@ -22,14 +22,14 @@ export class ResumeComponent implements OnInit {
   newImageURL: string = 'https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D';
 
   ngOnInit() {
-    this.loadAllResumes(); // Загружаем резюме при старте
+    this.loadAllResumes();
   }
 
   constructor(private resumeService: ResumeService) {
     this.loadAllResumes();
   }
 
-  
+
   loadAllResumes() {
     // Симуляция загрузки резюме (например, из LocalStorage или базы данных)
     /*
@@ -59,7 +59,7 @@ export class ResumeComponent implements OnInit {
     const storedResumes = localStorage.getItem('resumes');
     this.resumes = storedResumes ? JSON.parse(storedResumes) : [];
   }
-  
+
 
   //ngOnInit(): void {
   //  this.resumeService.getResumes().subscribe(resumes => {
@@ -111,5 +111,5 @@ export class ResumeComponent implements OnInit {
     this.resumes = this.resumes.filter(resume => resume.id !== id);
     this.saveResumes(); // Сохранение изменений в localStorage
   }
-  
+
 }

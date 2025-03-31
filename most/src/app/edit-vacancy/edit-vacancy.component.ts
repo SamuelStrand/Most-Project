@@ -3,14 +3,14 @@ import { VacancyService } from '../services/vacancy.service';
 import { Vacancy } from '../shared/models/vacancy';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgIf, NgFor } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // ✅ Исправленный импорт
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-vacancy',
   standalone: true,
   templateUrl: './edit-vacancy.component.html',
   styleUrls: ['./edit-vacancy.component.css'],
-  imports: [NgIf, NgFor, FormsModule] // ✅ FormsModule теперь из @angular/forms
+  imports: [NgIf, NgFor, FormsModule]
 })
 export class EditVacancyComponent {
   vacancy!: Vacancy;
@@ -28,6 +28,6 @@ export class EditVacancyComponent {
 
   saveVacancy() {
     this.vacancyService.updateVacancy(this.vacancy);
-    this.router.navigate(['/']); // После сохранения уходим на главную
+    this.router.navigate(['/']);
   }
 }

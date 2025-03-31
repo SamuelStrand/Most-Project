@@ -63,6 +63,14 @@ button:hover {
   background-color: #0056b3;
 }
 
+/* Кнопка Apply, когда уже подана заявка */
+.apply-btn:disabled,
+.apply-btn.applied {
+  background-color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
 button[routerLink] {
   background-color: #28a745;
   color: white;

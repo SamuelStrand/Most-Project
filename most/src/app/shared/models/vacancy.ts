@@ -8,5 +8,5 @@ export class Vacancy{
     whours!:number;
     favorite:boolean = false;
     imageUrl!:string;
-    wformat!:string
+    wformat!:string;
 }
