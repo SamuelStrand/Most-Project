@@ -13,6 +13,7 @@
   color: #333;
 }
 
+/* Карточка профиля */
 .profile-card {
   display: flex;
   align-items: center;
@@ -20,20 +21,25 @@
   padding: 15px;
   border-radius: 10px;
   margin-bottom: 10px;
+  gap: 15px;
 }
 
+/* Блок с информацией о профиле */
 .profile-info {
   display: flex;
   align-items: center;
 }
 
+/* Фото профиля с исправленным разрешением */
 .profile-pic {
-  width: 50px;
-  height: 50px;
+  width: 80px; /* Увеличил для лучшей видимости */
+  height: 80px;
   border-radius: 50%;
-  margin-right: 15px;
+  object-fit: cover; /* Чтобы не растягивались изображения */
+  border: 2px solid #ddd;
 }
 
+/* Детали резюме */
 .resume-details {
   background: #ffffff;
   padding: 15px;
@@ -44,6 +50,8 @@
 
 .resume-details h2 {
   color: #007bff;
+  font-size: 18px;
+  margin-bottom: 5px;
 }
 
 .resume-details p {
@@ -52,6 +60,7 @@
   margin: 5px 0;
 }
 
+/* Статистика */
 .stats {
   background: #e9ecef;
   padding: 10px;
@@ -59,6 +68,7 @@
   font-size: 14px;
 }
 
+/* Блок с кнопками */
 .actions {
   display: flex;
   align-items: center;
@@ -67,9 +77,13 @@
 }
 
 .actions button {
+
+  width: 100%;
+
+
   background-color: #007bff;
   color: white;
-  padding: 8px 15px;
+  padding: 10px 15px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -81,6 +95,7 @@
   background-color: #0056b3;
 }
 
+/* Кнопка удаления */
 .actions button:last-of-type {
   background-color: #dc3545;
 }
@@ -89,20 +104,32 @@
   background-color: #c82333;
 }
 
+/* Поля ввода */
 .resume-container input {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   border: 1px solid #ced4da;
   border-radius: 5px;
   margin: 10px 0;
   font-size: 14px;
+  transition: border 0.3s ease;
 }
 
-.resume-container button {
+.resume-container input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Кнопка добавления */
+.resume-container .main-buttons button {
+
+  margin: 5px 10px;
+
   width: 100%;
-  background-color: #28a745;
+  background-color: #3dd661;
   color: white;
-  padding: 10px;
+  padding: 12px;
   border: none;
   border-radius: 5px;
   cursor: pointer;

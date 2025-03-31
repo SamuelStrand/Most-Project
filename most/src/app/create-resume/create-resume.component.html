@@ -1,0 +1,11 @@
+<div class="resume-form">
+    <h2>Добавить резюме</h2>
+    <input type="text" [(ngModel)]="newName" placeholder="Имя" />
+    <input type="text" [(ngModel)]="newRole" placeholder="Должность" />
+    <input type="text" [(ngModel)]="newSalary" placeholder="Зарплата" />
+    <input type="text" [(ngModel)]="newWorkExperience" placeholder="Опыт работы" />
+    <input type="text" [(ngModel)]="newWorkHours" placeholder="Часы работы" />
+    <input type="text" [(ngModel)]="newImageURL" placeholder="Ссылка на фото" />
+
+    <button (click)="addResume(); navigateToResume()">➕ Добавить резюме</button>
+</div>

@@ -33,15 +33,11 @@
         </div>
         <hr>
     </div>
-
-    <button (click)="addResume()">➕ Добавить резюме</button>
-    <input type="text" [(ngModel)]="newRole" placeholder="Введите роль" />
-    <input type="text" [(ngModel)]="newName" placeholder="Введите имя" />
-    <input type="text" [(ngModel)]="newSalary" placeholder="Enter a salary" />
-    <input type="text" [(ngModel)]="newWorkExperience" placeholder="Enter you work experience" />
     
-    <input type="text" [(ngModel)]="newWorkHours" placeholder="Enter work hours" />
-    <input type="text" [(ngModel)]="newImageURL" placeholder="Image URL:" />
+    <div class="main-buttons">
+    <button><a routerLink="/create-resume">➕ Добавить новое резюме</a></button>   
+
 
     <button (click)="loadAllResumes()">📂 Получить все резюме</button>
+    </div>
 </div>

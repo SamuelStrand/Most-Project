@@ -9,6 +9,7 @@ import { CreateVacancyComponent } from './create-vacancy/create-vacancy.componen
 import { EditVacancyComponent } from './edit-vacancy/edit-vacancy.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { ApplicationsComponent } from './applications/applications.component';
+import { CreateResumeComponent } from './create-resume/create-resume.component';
 
 
 
@@ -28,7 +29,8 @@ export const routes: Routes = [
   {path: 'register',component: RegisterComponent},
   { path: 'create-vacancy', component: CreateVacancyComponent },
   { path: 'edit-vacancy/:id', component: EditVacancyComponent },
-  { path: 'applications', component: ApplicationsComponent }
+  { path: 'applications', component: ApplicationsComponent },
+  { path: 'create-resume', component: CreateResumeComponent }
 
 
 
