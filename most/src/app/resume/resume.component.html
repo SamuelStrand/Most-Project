@@ -5,11 +5,11 @@
     <div *ngFor="let resume of resumes">
         <div class="profile-card">
             <div class="profile-info">
-                <img src="https://www.shutterstock.com/image-photo/head-shot-portrait-close-smiling-600nw-1714666150.jpg"
+                <img [src]="resume.imageURL" alt="Фото резюме"
                     alt="Profile Picture" class="profile-pic">
                 <div>
                     <h3>{{ resume.name }}</h3>
-                    <p>Ваш статус на hh.kz: <b>{{ resume.status }}</b></p>
+                    <p>Ваш статус: <b>{{ resume.status }}</b></p>
                 </div>
             </div>
         </div>
@@ -17,6 +17,9 @@
         <div class="resume-details">
             <h2>{{ resume.role }}</h2>
             <p>Обновлено {{ resume.lastUpdated }}</p>
+            <p>Salary: {{ resume.salary}}</p>
+            <p>Work Experience: {{ resume.workExperience }}</p>
+            <p>Work hours: {{ resume.workHours }}</p>
 
             <div class="stats">
                 <p>📊 Статистика за неделю</p>
@@ -29,11 +32,18 @@
                 <span>{{ resume.vacancies }} вакансий</span>
             </div>
         </div>
+        <hr>
     </div>
 
     <!-- Кнопки управления -->
     <button (click)="addResume()">➕ Добавить резюме</button>
     <input type="text" [(ngModel)]="newRole" placeholder="Введите роль" />
+    <input type="text" [(ngModel)]="newName" placeholder="Введите имя" />
+    <input type="text" [(ngModel)]="newSalary" placeholder="Enter a salary" />
+    <input type="text" [(ngModel)]="newWorkExperience" placeholder="Enter you work experience" />
+    
+    <input type="text" [(ngModel)]="newWorkHours" placeholder="Enter work hours" />
+    <input type="text" [(ngModel)]="newImageURL" placeholder="Image URL:" />
 
     <button (click)="loadAllResumes()">📂 Получить все резюме</button>
 </div>

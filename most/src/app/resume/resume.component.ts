@@ -15,6 +15,11 @@ export class ResumeComponent implements OnInit {
   resumes: any[] = []; // Хранение всех резюме
   profile: any = null; // Текущее выбранное резюме
   newRole: string = '';
+  newName: string = '';
+  newSalary: string = '';
+  newWorkExperience: string = '';
+  newWorkHours: string = '';  
+  newImageURL: string = 'https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D';
 
   ngOnInit() {
     this.loadAllResumes(); // Загружаем резюме при старте
@@ -71,11 +76,16 @@ export class ResumeComponent implements OnInit {
 
     const newResume = {
       id: Date.now(),
-      name: 'Иван Петров',
+      name: this.newName,
       status: 'В поиске',
       responses: 0,
       role: this.newRole, // Используем введенную роль
       lastUpdated: new Date().toLocaleDateString(),
+      salary: this.newSalary,
+      
+      workExperience: this.newWorkExperience,
+      workHours: this.newWorkHours,
+      imageURL: this.newImageURL,
       stats: { shows: 0, views: 0, invites: 0 },
       vacancies: 0
     };
