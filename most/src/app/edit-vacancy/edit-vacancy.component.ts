@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   templateUrl: './edit-vacancy.component.html',
   styleUrls: ['./edit-vacancy.component.css'],
-  imports: [NgIf, NgFor, FormsModule]
+  imports: [FormsModule]
 })
 export class EditVacancyComponent {
   vacancy!: Vacancy;

@@ -3,13 +3,12 @@ import { CommonModule } from '@angular/common';
 import { VacancyService } from '../services/vacancy.service';
 import { Vacancy } from '../shared/models/vacancy';
 import { ActivatedRoute } from '@angular/router';
-import { SearchComponent } from "../search/search.component";
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, SearchComponent,RouterModule],
+  imports: [CommonModule,RouterModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
