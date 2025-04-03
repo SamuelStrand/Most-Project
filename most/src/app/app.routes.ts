@@ -9,6 +9,8 @@ import { CreateVacancyComponent } from './create-vacancy/create-vacancy.componen
 import { EditVacancyComponent } from './edit-vacancy/edit-vacancy.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { ApplicationsComponent } from './applications/applications.component';
+import { ResumeListComponent } from './resume-list/resume-list.component';
+import { ResumeFormComponent } from './resume-form/resume-form.component';
 
 
 
@@ -28,8 +30,11 @@ export const routes: Routes = [
   {path: 'register',component: RegisterComponent},
   { path: 'create-vacancy', component: CreateVacancyComponent },
   { path: 'edit-vacancy/:id', component: EditVacancyComponent },
-  { path: 'applications', component: ApplicationsComponent }
-
+  { path: 'applications', component: ApplicationsComponent },
+  { path: 'resumes', component: ResumeListComponent },
+  { path: 'create-resume', component: ResumeFormComponent },
+  { path: 'edit-resume/:id', component: ResumeFormComponent },
+  { path: '', redirectTo: '/resumes', pathMatch: 'full' },
 
 
 

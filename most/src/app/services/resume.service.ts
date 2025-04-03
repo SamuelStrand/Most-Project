@@ -1,60 +1,36 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-
-export interface Resume {
-  id: number;
-  name: string;
-  status: string;
-  responses: number;
-  role: string;
-  lastUpdated: string;
-  stats: {
-    shows: number;
-    views: number;
-    invites: number;
-  };
-  vacancies: number;
-}
+import { Resume } from '../shared/models/resume';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ResumeService {
-  private resumes: Resume[] = [
-    {
-      id: 1,
-      name: 'Иван Петров',
-      status: 'Активен',
-      responses: 5,
-      role: 'Frontend-разработчик',
-      lastUpdated: '2025-03-27',
-      stats: { shows: 50, views: 20, invites: 5 },
-      vacancies: 10
-    }
-  ];
+  private resumes: Resume[] = [];
+  private idCounter = 1;
 
-  private resumesSubject = new BehaviorSubject<Resume[]>(this.resumes);
-  resumes$ = this.resumesSubject.asObservable();
+  getResumes(): Resume[] {
+    return this.resumes;
+  }
 
-  getResumes(): Observable<Resume[]> {
-    return this.resumes$;
+  getResumeById(id: number): Resume | undefined {
+    return this.resumes.find((resume) => resume.id === id);
   }
 
   addResume(resume: Resume): void {
+    resume.id = this.idCounter++;
     this.resumes.push(resume);
-    this.resumesSubject.next([...this.resumes]); // Обновляем подписчиков
   }
 
-  updateResume(resume: Resume): void {
-    const index = this.resumes.findIndex(r => r.id === resume.id);
+  updateResume(updatedResume: Resume): boolean {
+    const index = this.resumes.findIndex((r) => r.id === updatedResume.id);
     if (index !== -1) {
-      this.resumes[index] = resume;
-      this.resumesSubject.next([...this.resumes]);
+      this.resumes[index] = updatedResume;
+      return true;
     }
+    return false;
   }
 
   deleteResume(id: number): void {
-    this.resumes = this.resumes.filter(resume => resume.id !== id);
-    this.resumesSubject.next([...this.resumes]);
+    this.resumes = this.resumes.filter((resume) => resume.id !== id);
   }
 }

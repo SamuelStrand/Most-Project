@@ -1,0 +1,16 @@
+<div class="resume-form">
+  <h2>{{ editMode ? 'Edit Resume' : 'Create Resume' }}</h2>
+  <label>Title:</label>
+  <input type="text" [(ngModel)]="resume.title" />
+
+  <label>Description:</label>
+  <textarea [(ngModel)]="resume.description"></textarea>
+
+  <label>Experience:</label>
+  <input type="text" [(ngModel)]="resume.experience" />
+
+  <label>Skills (comma separated):</label>
+  <input type="text" [(ngModel)]="resume.skills" />
+
+  <button (click)="saveResume()">{{ editMode ? 'Update' : 'Save' }}</button>
+</div>

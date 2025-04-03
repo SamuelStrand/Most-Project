@@ -1,0 +1,12 @@
+<div class="resume-list">
+  <h2>My Resumes</h2>
+  <button [routerLink]="['/create-resume']">➕ Create Resume</button>
+  <ul>
+    <li *ngFor="let resume of resumes">
+      <h3>{{ resume.title }}</h3>
+      <p>{{ resume.description }}</p>
+      <button [routerLink]="['/edit-resume', resume.id]">✏ Edit</button>
+      <button (click)="deleteResume(resume.id)" class="delete-btn">🗑 Delete</button>
+    </li>
+  </ul>
+</div>
