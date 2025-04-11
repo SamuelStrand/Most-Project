@@ -1,13 +1,11 @@
-<div class="applications">
-  <h2>My Applications</h2>
-  <ul *ngIf="applications.length > 0; else noApplications">
-    <li *ngFor="let app of applications">
-      <h3>{{ app.name }}</h3>
-      <p><strong>Salary:</strong> {{ app.salary }}</p>
-    </li>
-  </ul>
+<div class="applications-container">
+  <h2>Your Applications</h2>
+  <button (click)="refreshApplications()">Refresh</button>
+  
+  <div *ngIf="applications.length === 0" class="no-applications">
+    You haven't applied to any vacancies yet.
+  </div>
 
-  <ng-template #noApplications>
-    <p>You haven't applied for any jobs yet.</p>
-  </ng-template>
+  <div *ngFor="let application of applications" class="application-card">
+  </div>
 </div>

@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+.name, .salary, .details, .details div, .details span, .favorite {
+  font-family: 'Montserrat', sans-serif;
+}
 .vacancies-list {
   list-style: none;
   padding: 0;
@@ -6,11 +11,11 @@
 }
 
 .vacancy-item {
-  background: #fffaf0;
+  background: #ffffff;
   padding: 15px;
   margin-bottom: 15px;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(47, 47, 162, 0.2); 
   transition: transform 0.2s ease-in-out;
 }
 
@@ -20,46 +25,61 @@
 
 .vacancy-item a {
   text-decoration: none;
-  color: inherit;
+  color: #2f2fa2;
   display: block;
 }
 
 .name {
-  font-size: 18px;
+  font-size: 22px;
+  font-weight: 600;
   font-weight: bold;
-  color: #333;
+  color: #f64c72;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
 
 .salary {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
-  color: #007bff;
+  color: #4c4ccf;
   margin: 5px 0;
 }
 
 .details {
-  font-size: 14px;
+  font-size: 16px;
   color: #555;
-  margin-top: 10px;
+  margin-top: 12px;
 }
 
 .details div {
-  margin-bottom: 5px;
+  margin-bottom: 8px;
+  padding: 8px;
+  background-color: #f4f4ff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.2s ease;
 }
-
+.details span {
+  font-weight: 600;
+  color: #2f2fa2;
+  margin-right: 5px;
+}
 .favorite {
   float: right;
   font-size: 20px;
   cursor: pointer;
-  color: #ccc;
+  color: #8080c0;
   transition: all 0.3s;
 }
 
 .favorite.active {
-  color: red;
+  color: #f64c72;
 }
 
 .favorite:hover {
   transform: scale(1.1);
+  color: #4c4ccf;
 }

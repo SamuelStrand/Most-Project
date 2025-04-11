@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+.name, .salary, .details, .details div, .details span, .favorite {
+  font-family: 'Montserrat', sans-serif;
+}
+
 .vacancy-detail {
   max-width: 600px;
   margin: 40px auto;
@@ -26,13 +32,34 @@
 }
 
 .favorite.active {
-  color: red;
+  color: #f64c72;
 }
 
 .vacancy-info p {
   font-size: 16px;
   margin: 8px 0;
   color: #555;
+}
+
+.details {
+  margin-top: 12px;
+}
+
+.details div {
+  margin-bottom: 8px;
+  padding: 8px;
+  background-color: #f4f4ff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.details span {
+  font-weight: 600;
+  color: #2f2fa2;
+  margin-right: 5px;
 }
 
 button {
@@ -63,7 +90,6 @@ button:hover {
   background-color: #0056b3;
 }
 
-/* Кнопка Apply, когда уже подана заявка */
 .apply-btn:disabled,
 .apply-btn.applied {
   background-color: #ccc;

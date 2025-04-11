@@ -6,9 +6,9 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterModule, CommonModule], // ✅ Добавлены модули
+  imports: [ReactiveFormsModule, RouterModule, CommonModule],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
   form: FormGroup;
@@ -19,6 +19,7 @@ export class RegisterComponent implements OnInit {
     private router: Router
   ) {
     this.form = this.formBuilder.group({
+      name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required]
@@ -28,7 +29,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {}
 
   submit(): void {
-    console.log('Регистрация отправлена:', this.form.value);
-    this.successMessage = "Вы успешно зарегистрированы!";
+    console.log('Registration submitted:', this.form.value);
+    this.successMessage = "You have successfully registered!";
   }
 }

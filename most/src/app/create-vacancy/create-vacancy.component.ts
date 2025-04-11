@@ -22,7 +22,7 @@ export class CreateVacancyComponent {
     favorite: false,
     imageUrl: '',
     schedule: 4 / 2,
-    wformat: 'offline'
+    wformat: 'offline',
   };
 
   constructor(private vacancyService: VacancyService) {}

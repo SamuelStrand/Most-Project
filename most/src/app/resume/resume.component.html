@@ -1,43 +1,41 @@
 <div class="resume-container">
-    <h1>Мои резюме</h1>
+    <h1>My Resumes</h1>
 
     <div *ngFor="let resume of resumes">
         <div class="profile-card">
             <div class="profile-info">
-                <img [src]="resume.imageURL" alt="Фото резюме"
-                    alt="Profile Picture" class="profile-pic">
+                <img [src]="resume.imageURL" alt="Profile Picture" class="profile-pic">
                 <div>
                     <h3>{{ resume.name }}</h3>
-                    <p>Ваш статус: <b>{{ resume.status }}</b></p>
+                    <p>Your status: <b>{{ resume.status }}</b></p>
                 </div>
             </div>
         </div>
 
         <div class="resume-details">
             <h2>{{ resume.role }}</h2>
-            <p>Обновлено {{ resume.lastUpdated }}</p>
+            <p>Updated {{ resume.lastUpdated }}</p>
             <p>Salary: {{ resume.salary}}</p>
             <p>Work Experience: {{ resume.workExperience }}</p>
             <p>Work hours: {{ resume.workHours }}</p>
 
             <div class="stats">
-                <p>📊 Статистика за неделю</p>
-                {{ resume.stats.shows }} показов | {{ resume.stats.views }} просмотров | {{ resume.stats.invites }} приглашений
+                <p>📊 Weekly Stats</p>
+                {{ resume.stats.shows }} views | {{ resume.stats.views }} views | {{ resume.stats.invites }} invitations
             </div>
 
             <div class="actions">
-                <button (click)="updateResume(resume.id)">🔼 Поднять в поиске</button>
-                <button (click)="deleteResume(resume.id)">🗑 Удалить</button>
-                <span>{{ resume.vacancies }} вакансий</span>
+                <button (click)="updateResume(resume.id)">🔼 Raise in search</button>
+                <button (click)="deleteResume(resume.id)">🗑 Delete</button>
+                <span>{{ resume.vacancies }} vacancies</span>
             </div>
         </div>
         <hr>
     </div>
     
     <div class="main-buttons">
-    <button><a routerLink="/create-resume">➕ Добавить новое резюме</a></button>   
+    <button><a routerLink="/create-resume" class="new">➕ Add New Resume</a></button>   
 
-
-    <button (click)="loadAllResumes()">📂 Получить все резюме</button>
+    <button (click)="loadAllResumes()">📂 Get All Resumes</button>
     </div>
 </div>

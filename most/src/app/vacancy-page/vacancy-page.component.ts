@@ -33,12 +33,15 @@ export class VacancyPageComponent {
     });
   }
 
-  applyForVacancy() {
+  aapplyForVacancy() {
+    console.log('Applying for:', this.vacancy); 
     if (!this.hasApplied) {
       this.applicationService.applyForVacancy(this.vacancy);
+      console.log('After apply:', this.applicationService.getApplications());
       this.hasApplied = true;
     }
   }
+ 
 
   deleteVacancy() {
     if (confirm('Are you sure you want to delete this vacancy?')) {

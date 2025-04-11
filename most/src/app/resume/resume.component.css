@@ -13,7 +13,7 @@
   color: #333;
 }
 
-/* Карточка профиля */
+
 .profile-card {
   display: flex;
   align-items: center;
@@ -24,22 +24,21 @@
   gap: 15px;
 }
 
-/* Блок с информацией о профиле */
+
 .profile-info {
   display: flex;
   align-items: center;
 }
 
-/* Фото профиля с исправленным разрешением */
 .profile-pic {
-  width: 80px; /* Увеличил для лучшей видимости */
+  width: 80px; 
   height: 80px;
   border-radius: 50%;
-  object-fit: cover; /* Чтобы не растягивались изображения */
+  object-fit: cover;
   border: 2px solid #ddd;
 }
 
-/* Детали резюме */
+
 .resume-details {
   background: #ffffff;
   padding: 15px;
@@ -60,15 +59,16 @@
   margin: 5px 0;
 }
 
-/* Статистика */
+
 .stats {
   background: #e9ecef;
   padding: 10px;
   border-radius: 5px;
   font-size: 14px;
 }
-
-/* Блок с кнопками */
+.new{
+  color:white
+}
 .actions {
   display: flex;
   align-items: center;
@@ -95,7 +95,7 @@
   background-color: #0056b3;
 }
 
-/* Кнопка удаления */
+
 .actions button:last-of-type {
   background-color: #dc3545;
 }
@@ -104,7 +104,7 @@
   background-color: #c82333;
 }
 
-/* Поля ввода */
+
 .resume-container input {
   width: 100%;
   padding: 12px;
@@ -121,22 +121,27 @@
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
 }
 
-/* Кнопка добавления */
+
+.resume-container .main-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
 .resume-container .main-buttons button {
-
-  margin: 5px 10px;
-
-  width: 100%;
-  background-color: #3dd661;
+  margin: 5px; 
+  background-color: #2f2582;
   color: white;
   padding: 12px;
   border: none;
-  border-radius: 5px;
+  border-radius: 7px;
   cursor: pointer;
   font-size: 16px;
   transition: background 0.3s ease;
+  text-align: center;
 }
 
 .resume-container button:hover {
-  background-color: #218838;
+  background-color: #382e92;
 }

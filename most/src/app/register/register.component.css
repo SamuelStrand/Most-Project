@@ -1,17 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
 .register-container {
   width: 350px;
   margin: 50px auto;
   padding: 20px;
   text-align: center;
-  background: #fffaf0;
+  background: #f3f7ff;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', sans-serif;
 }
 
 .register-container h2 {
   font-size: 24px;
   margin-bottom: 20px;
   color: #333;
+  font-family: 'Poppins', sans-serif;
 }
 
 .register-container input {
@@ -22,12 +26,13 @@
   border-radius: 5px;
   font-size: 16px;
   background: #fff;
+  font-family: 'Poppins', sans-serif;
 }
 
 .register-button {
   width: 100%;
   padding: 12px;
-  background: black;
+  background: #242582;
   color: white;
   border: none;
   border-radius: 5px;
@@ -37,7 +42,7 @@
 }
 
 .register-button:hover {
-  background: #333;
+  background: #1c1e4f;
 }
 
 .login-link {
@@ -46,7 +51,7 @@
 }
 
 .login-link a {
-  color: black;
+  color: #242582;
   text-decoration: none;
   font-weight: bold;
 }

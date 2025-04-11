@@ -1,18 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Raleway:wght@600&display=swap');
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #007bff;
+  background: #2f2fa2;
   padding: 10px 20px;
   color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Raleway', sans-serif;
+  font-weight: bold;
 }
 
 .logo a {
   font-size: 20px;
   font-weight: bold;
-  color: white;
+  color: #f64c72;
   text-decoration: none;
+  font-family: 'Raleway', sans-serif;
 }
 
 .nav-links {
@@ -33,6 +37,9 @@
 
 .search {
   display: flex;
+  background: #f64c72;
+  padding: 2px;
+  border-radius: 10px;
 }
 
 .search input {
@@ -40,18 +47,23 @@
   border: none;
   border-radius: 5px;
   outline: none;
+  background: white;
+  color: black;
 }
 
 .search button {
   margin-left: 5px;
   padding: 5px 10px;
-  background: white;
+  background: #2f2fa2;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  color: #007bff;
+  color: #f64c72;
+  font-family: 'Raleway', sans-serif;
+  font-weight: bold;
 }
 
 .search button:hover {
-  background: #f1f1f1;
+  background: white;
+  color: #f64c72;
 }
