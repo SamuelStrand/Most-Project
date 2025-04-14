@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ApplicationService } from '../services/application.service';
 import { Vacancy } from '../shared/models/vacancy';
-
+import { CommonModule } from '@angular/common';
 @Component({
+  imports: [CommonModule],
   selector: 'app-applications',
   templateUrl: './applications.component.html',
-  styleUrl: './applications.component.css'
+  styleUrls: ['./applications.component.css']
 })
 export class ApplicationsComponent implements OnInit {
   applications: Vacancy[] = [];
@@ -13,7 +14,14 @@ export class ApplicationsComponent implements OnInit {
   constructor(private applicationService: ApplicationService) {}
 
   ngOnInit() {
+    this.loadApplications();
+  }
+
+  loadApplications() {
     this.applications = this.applicationService.getApplications();
-    console.log('Loaded applications:', this.applications);
+  }
+
+  refreshApplications() {
+    this.loadApplications();
   }
 }

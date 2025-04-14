@@ -9,13 +9,13 @@ export class VacancyService {
     {
       id: 1,
       name: 'Administrator',
-      salary:'from $1,000 per month before taxes.',
-      Payments:'once a month',
-      workexp:'not required',
-      whours:8,
+      salary: 'from $1,000 per month before taxes.',
+      Payments: 'once a month',
+      workexp: 'not required',
+      whours: 8,
       favorite: false,
       imageUrl: '/food-1.jpeg',
-      schedule: 4/2,
+      schedule: 4 / 2,
       wformat: 'offline'
     },
     {
