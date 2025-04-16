@@ -4,6 +4,8 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 
 from .serializers import RegisterSerializer
+from .serializers import EmailTokenObtainPairSerializer
+
 
 
 @api_view(['POST'])
@@ -24,3 +26,12 @@ def profile_view(request):
         "email": user.email,
         "is_verified": user.is_verified
     })
+
+@api_view(['POST'])
+def email_login_view(request):
+    serializer = EmailTokenObtainPairSerializer(data=request.data, context={'request': request})
+    
+    if serializer.is_valid():
+        return Response(serializer.validated_data, status=status.HTTP_200_OK)
+    
+    return Response(serializer.errors, status=status.HTTP_401_UNAUTHORIZED)

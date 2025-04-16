@@ -7,5 +7,10 @@ class CustomUser(AbstractUser):
     age = models.PositiveIntegerField(blank=True, null=True)
     is_verified = models.BooleanField(default=False)
 
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username']
+
     def __str__(self):
-        return self.username
+        return self.email
+    
+    

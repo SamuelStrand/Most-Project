@@ -1,8 +1,8 @@
 from django.urls import path
-
-from .views import register_view, profile_view
+from . import views  # импортируем модуль views
 
 urlpatterns = [
-    path('register/', register_view, name='register'),
-    path('me/', profile_view, name='profile'),
+    path('register/', views.register_view, name='register'),
+    path('me/', views.profile_view, name='profile'),
+    path('login/', views.email_login_view, name='login'),
 ]

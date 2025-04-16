@@ -45,7 +45,19 @@ export class AuthService {
     return this.http.post(`${this.BASE_URL}/users/register/`, data); // ✅ тут return
   }
 
-  login(credentials: { username: string; password: string }): Observable<any> {
-    return this.http.post(`${this.BASE_URL}/token/`, credentials); // ✅ тут return
+  login(credentials: { email: string; password: string }): Observable<any> {
+    return this.http.post(`${this.BASE_URL}/users/login/`, {
+      email: credentials.email,
+      password: credentials.password
+    });
+  }
+  
+  getProfile(): Observable<any> {
+    const token = localStorage.getItem('access');
+    return this.http.get(`${this.BASE_URL}/users/me/`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
   }
 }
