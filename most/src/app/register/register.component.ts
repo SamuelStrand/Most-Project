@@ -43,7 +43,7 @@ import { AuthService } from '../services/auth.service'; // путь поправ
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterModule, CommonModule],
+  imports: [ReactiveFormsModule,CommonModule,RouterModule],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
@@ -87,7 +87,12 @@ export class RegisterComponent implements OnInit {
       },
       error: (err) => {
         this.successMessage = null;
-        this.errorMessage = err.error?.email?.[0] || err.error?.username?.[0] || 'Ошибка регистрации';
+        console.error('Ошибка:', err);
+        this.errorMessage =
+          err.error?.email?.[0] ||
+          err.error?.username?.[0] ||
+          err.error?.password?.[0] ||
+          'Ошибка регистрации';
       }
     });
   }

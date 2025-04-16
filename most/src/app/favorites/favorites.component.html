@@ -1,28 +1,28 @@
 <div class="container">
-    <h2>Favorite Vacancies</h2>
-    
-    <ul class="vacancies-list" *ngIf="favorites.length; else noFavorites">
-      <li *ngFor="let vacancy of favorites" class="vacancy-item">
-        <a routerLink="/vacancy/{{vacancy.id}}">
-          <div class="vacancy-content">
-            <div class="vacancy-name">{{ vacancy.name }}</div>
-            
-            <button class="favorite active" 
-                    (click)="toggleFavorite(vacancy.id, $event)">
-              ❤️
-            </button>
-            
-            <div class="vacancy-details">
-              <div><span>Salary:</span> {{ vacancy.salary }}</div>
-              <div><span>Schedule:</span> {{ vacancy.schedule }} days on/off</div>
-              <div><span>Format:</span> {{ vacancy.wformat }}</div>
-            </div>
-          </div>
-        </a>
-      </li>
-    </ul>
+  <h2>Favorite Vacancies</h2>
   
-    <ng-template #noFavorites>
-      <p class="empty-message">You don't have any favorite vacancies yet</p>
-    </ng-template>
-  </div>
+  <ul class="vacancies-list" *ngIf="favorites.length; else noFavorites">
+    <li *ngFor="let vacancy of favorites" class="vacancy-item">
+      <a routerLink="/vacancy/{{vacancy.id}}">
+        <div class="vacancy-content">
+          <div class="vacancy-name">{{ vacancy.name }}</div>
+          
+          <button class="favorite active" 
+                  (click)="toggleFavorite(vacancy.id, $event)">
+            ❤️
+          </button>
+          
+          <div class="vacancy-details">
+            <div><span>Salary:</span> {{ vacancy.salary }}</div>
+            <div><span>Schedule:</span> {{ vacancy.schedule }} days on/off</div>
+            <div><span>Format:</span> {{ vacancy.wformat }}</div>
+          </div>
+        </div>
+      </a>
+    </li>
+  </ul>
+
+  <ng-template #noFavorites>
+    <p class="empty-message">You don't have any favorite vacancies yet</p>
+  </ng-template>
+</div>

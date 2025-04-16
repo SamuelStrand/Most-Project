@@ -26,15 +26,9 @@ export const routes: Routes = [
   {path: 'vacancy/:id', component: VacancyPageComponent},
   { path: 'favorites', component: FavoritesComponent },
   {path: 'login',component: LoginComponent},
-  {path: 'register',component: RegisterComponent},
+  { path: 'register', component: RegisterComponent },
   { path: 'create-vacancy', component: CreateVacancyComponent },
   { path: 'edit-vacancy/:id', component: EditVacancyComponent },
   { path: 'applications', component: ApplicationsComponent },
   { path: 'create-resume', component: CreateResumeComponent }
-
-
-
-
-
-
 ];
