@@ -3,7 +3,10 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 
-from .serializers import RegisterSerializer
+from .models import Vacancy
+from .serializers import RegisterSerializer, VacancySerializer
+from .serializers import EmailTokenObtainPairSerializer
+
 
 
 @api_view(['POST'])
