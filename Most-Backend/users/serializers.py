@@ -4,7 +4,10 @@ from django.contrib.auth import get_user_model, authenticate
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 
+from users.models import Vacancy
+
 User = get_user_model()
+
 
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
@@ -20,6 +23,12 @@ class RegisterSerializer(serializers.ModelSerializer):
             password=validated_data['password'],
         )
         return user
+
+
+class VacancySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Vacancy
+        fields = '__all__'
     
 
 class EmailTokenObtainPairSerializer(serializers.Serializer):
