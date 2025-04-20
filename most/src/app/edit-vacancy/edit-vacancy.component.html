@@ -1,26 +1,45 @@
-<div class="edit-vacancy-container">
+<div class="edit-vacancy-container" *ngIf="vacancy$ | async as vacancy">
   <h2>Редактирование вакансии</h2>
 
-  <label>Название:</label>
-  <input [(ngModel)]="vacancy.name" type="text" />
+  <form (ngSubmit)="saveVacancy(vacancy)">
+    <div class="form-group">
+      <label>Название:</label>
+      <input [(ngModel)]="vacancy.name" name="name" type="text" required />
+    </div>
 
-  <label>Зарплата:</label>
-  <input [(ngModel)]="vacancy.salary" type="text" />
+    <div class="form-group">
+      <label>Зарплата:</label>
+      <input [(ngModel)]="vacancy.salary" name="salary" type="text" required />
+    </div>
 
-  <label>Выплаты:</label>
-  <input [(ngModel)]="vacancy.Payments" type="text" />
+    <div class="form-group">
+      <label>Выплаты:</label>
+      <input [(ngModel)]="vacancy.payments" name="Payments" type="text" />
+    </div>
 
-  <label>Опыт работы:</label>
-  <input [(ngModel)]="vacancy.workexp" type="text" />
+    <div class="form-group">
+      <label>Опыт работы:</label>
+      <input [(ngModel)]="vacancy.workexp" name="workexp" type="text" />
+    </div>
 
-  <label>Часы работы:</label>
-  <input [(ngModel)]="vacancy.whours" type="number" />
+    <div class="form-group">
+      <label>Часы работы:</label>
+      <input [(ngModel)]="vacancy.whours" name="whours" type="number" />
+    </div>
 
-  <label>График:</label>
-  <input [(ngModel)]="vacancy.schedule" type="text" />
+    <div class="form-group">
+      <label>График:</label>
+      <input [(ngModel)]="vacancy.schedule" name="schedule" type="text" />
+    </div>
 
-  <label>Формат работы:</label>
-  <input [(ngModel)]="vacancy.wformat" type="text" />
+    <div class="form-group">
+      <label>Формат работы:</label>
+      <input [(ngModel)]="vacancy.wformat" name="wformat" type="text" />
+    </div>
 
-  <button (click)="saveVacancy()">Сохранить</button>
+    <div class="form-actions">
+      <button type="button" (click)="cancel()" class="cancel-btn">Отмена</button>
+      <button type="submit" class="save-btn">Сохранить</button>
+    </div>
+  </form>
 </div>

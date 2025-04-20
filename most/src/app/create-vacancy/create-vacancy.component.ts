@@ -1,50 +1,49 @@
 import { Component } from '@angular/core';
 import { Vacancy } from '../shared/models/vacancy';
 import { VacancyService } from '../services/vacancy.service';
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-vacancy',
   templateUrl: './create-vacancy.component.html',
-  imports: [
-    FormsModule
-  ],
-  styleUrl: './create-vacancy.component.css'
+  styleUrls: ['./create-vacancy.component.css'],
+  imports: [FormsModule],
+  standalone: true
 })
 export class CreateVacancyComponent {
-  newVacancy: Vacancy = {
-    id: 0,
+  newVacancy: Omit<Vacancy, 'id'> = {
     name: '',
     salary: '',
-    Payments: '',
+    payments: '', // Простое поле без геттеров/сеттеров
     workexp: '',
     whours: 8,
     favorite: false,
     imageUrl: '',
     schedule: 4 / 2,
-    wformat: 'offline',
+    wformat: 'offline'
   };
 
-  constructor(private vacancyService: VacancyService) {}
+  constructor(
+    private vacancyService: VacancyService,
+    private router: Router
+  ) {}
 
   submitVacancy() {
     if (this.newVacancy.name && this.newVacancy.salary) {
-      this.vacancyService.addVacancy(this.newVacancy);
-      alert('Vacancy successfully added!');
-      this.newVacancy = {
-        id: 0,
-        name: '',
-        salary: '',
-        Payments: '',
-        workexp: '',
-        whours: 8,
-        favorite: false,
-        imageUrl: '',
-        schedule: 4 / 2,
-        wformat: 'offline'
-      };
+      this.vacancyService.createVacancy(this.newVacancy).subscribe({
+        next: (response) => {
+          console.log('Вакансия создана:', response);
+          alert('Вакансия успешно добавлена!');
+          this.router.navigate(['/']);
+        },
+        error: (err) => {
+          console.error('Ошибка:', err);
+          alert('Ошибка при создании вакансии: ' + err.error?.message);
+        }
+      });
     } else {
-      alert('Please fill in all required fields!');
+      alert('Заполните обязательные поля: название и зарплата');
     }
   }
 }

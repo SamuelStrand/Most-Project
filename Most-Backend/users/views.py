@@ -2,7 +2,6 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
-
 from .models import Vacancy
 from .serializers import RegisterSerializer, VacancySerializer
 from .serializers import EmailTokenObtainPairSerializer
@@ -45,6 +44,7 @@ def vacancy_list(request):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        print("Ошибки валидации:", serializer.errors)  # Логируем ошибки
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'PUT', 'DELETE'])

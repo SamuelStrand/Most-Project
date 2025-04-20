@@ -2,7 +2,7 @@ export class Vacancy{
     id!:number;
     name!:string;
     salary!:string;
-    Payments!:string;
+    payments!: string;
     workexp!:string;
     schedule!:number;
     whours!:number;

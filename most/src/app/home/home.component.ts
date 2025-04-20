@@ -8,7 +8,7 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule,RouterModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
@@ -19,21 +19,27 @@ export class HomeComponent implements OnInit {
     private vacancyService: VacancyService,
     private route: ActivatedRoute
   ) {}
+
   toggleFavorite(id: number, event: Event): void {
     event.stopPropagation();
-    this.vacancyService.toggleFavorite(id);
+    const vacancy = this.vacancies.find(v => v.id === id);
+    if (vacancy) {
+      vacancy.favorite = !vacancy.favorite;
+      this.vacancyService.updateVacancy(vacancy).subscribe(); // Если используете бэкенд
+    }
   }
+
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      if (params['searchTerm']) {
-        this.vacancies = this.vacancyService.getAll().filter(vacancy =>
-          vacancy.name.toLowerCase().includes(params['searchTerm'].toLowerCase())
-        );
-      } else {
-        this.vacancies = this.vacancyService.getAll();
-      }
+      this.vacancyService.getAll().subscribe(vacancies => {
+        if (params['searchTerm']) {
+          this.vacancies = vacancies.filter(vacancy =>
+            vacancy.name.toLowerCase().includes(params['searchTerm'].toLowerCase())
+          );
+        } else {
+          this.vacancies = vacancies;
+        }
+      });
     });
-
-    console.log(this.vacancies);
   }
 }

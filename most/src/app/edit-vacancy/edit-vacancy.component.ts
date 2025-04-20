@@ -2,32 +2,41 @@ import { Component } from '@angular/core';
 import { VacancyService } from '../services/vacancy.service';
 import { Vacancy } from '../shared/models/vacancy';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgIf, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-edit-vacancy',
   standalone: true,
   templateUrl: './edit-vacancy.component.html',
   styleUrls: ['./edit-vacancy.component.css'],
-  imports: [FormsModule]
+  imports: [FormsModule, CommonModule]
 })
 export class EditVacancyComponent {
-  vacancy!: Vacancy;
+  vacancy$!: Observable<Vacancy>;
 
   constructor(
     private vacancyService: VacancyService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
-
-  ngOnInit() {
+  ) {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.vacancy = this.vacancyService.getVacancyById(id);
+    this.vacancy$ = this.vacancyService.getVacancyById(id);
   }
 
-  saveVacancy() {
-    this.vacancyService.updateVacancy(this.vacancy);
+  saveVacancy(vacancy: Vacancy) {
+    console.log('Отправляемые данные:', JSON.stringify(vacancy));
+    this.vacancyService.updateVacancy(vacancy).subscribe({
+      next: () => this.router.navigate(['/']),
+      error: (err) => {
+        console.error('Полный ответ сервера:', err.error);
+        alert('Ошибка сохранения: ' + JSON.stringify(err.error));
+      }
+    });
+  }
+
+  cancel() {
     this.router.navigate(['/']);
   }
 }

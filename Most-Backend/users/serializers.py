@@ -25,11 +25,15 @@ class RegisterSerializer(serializers.ModelSerializer):
         return user
 
 
+
 class VacancySerializer(serializers.ModelSerializer):
     class Meta:
         model = Vacancy
-        fields = '__all__'
-    
+        fields = '__all__'  # Или явно перечислите поля
+        extra_kwargs = {
+            'whours': {'required': True},  # Пример для обязательного поля
+            'schedule': {'required': True}
+        }
 
 class EmailTokenObtainPairSerializer(serializers.Serializer):
     email = serializers.EmailField()

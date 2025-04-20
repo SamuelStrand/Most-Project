@@ -1,4 +1,4 @@
-<div class="vacancy-detail">
+<div class="vacancy-detail" *ngIf="vacancy$ | async as vacancy">
   <div class="vacancy-header">
     <h2 class="name">{{ vacancy.name }}</h2>
     <span class="favorite {{ vacancy.favorite ? 'active' : '' }}">❤️</span>
@@ -7,17 +7,23 @@
   <div class="vacancy-info">
     <p><strong>Salary:</strong> <span class="salary">{{ vacancy.salary }}</span></p>
     <div class="details">
-      <div><span>Payments:</span> {{ vacancy.Payments }}</div>
+      <div><span>Payments:</span> {{ vacancy.payments }}</div>
       <div><span>Work Experience:</span> {{ vacancy.workexp }}</div>
       <div><span>Schedule:</span> {{ vacancy.schedule }} days on / off</div>
       <div><span>Working Hours:</span> {{ vacancy.whours }} hours per day</div>
       <div><span>Work Format:</span> {{ vacancy.wformat }}</div>
     </div>
-    <button [routerLink]="['/edit-vacancy', vacancy.id]" class="edit-btn">✏ Edit</button>
-    <button class="delete-btn" (click)="deleteVacancy()">🗑 Delete</button>
+    
+    <div class="action-buttons">
+      <button [routerLink]="['/edit-vacancy', vacancy.id]" class="edit-btn">✏ Edit</button>
+      <button class="delete-btn" (click)="deleteVacancy(vacancy)">🗑 Delete</button>
+    </div>
   </div>
 
-  <button class="apply-btn" (click)="aapplyForVacancy()" [disabled]="hasApplied" [class.applied]="hasApplied">
+  <button class="apply-btn" 
+          (click)="applyForVacancy(vacancy)" 
+          [disabled]="hasApplied" 
+          [class.applied]="hasApplied">
     🚀 {{ hasApplied ? 'Applied' : 'Apply Now' }}
   </button>
 </div>
