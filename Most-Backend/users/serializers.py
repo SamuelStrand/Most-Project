@@ -29,9 +29,9 @@ class RegisterSerializer(serializers.ModelSerializer):
 class VacancySerializer(serializers.ModelSerializer):
     class Meta:
         model = Vacancy
-        fields = '__all__'  # Или явно перечислите поля
+        fields = '__all__' 
         extra_kwargs = {
-            'whours': {'required': True},  # Пример для обязательного поля
+            'whours': {'required': True},
             'schedule': {'required': True}
         }
 

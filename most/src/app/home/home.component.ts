@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
     const vacancy = this.vacancies.find(v => v.id === id);
     if (vacancy) {
       vacancy.favorite = !vacancy.favorite;
-      this.vacancyService.updateVacancy(vacancy).subscribe(); // Если используете бэкенд
+      this.vacancyService.updateVacancy(vacancy).subscribe();
     }
   }
 

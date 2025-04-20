@@ -15,7 +15,7 @@ export class CreateVacancyComponent {
   newVacancy: Omit<Vacancy, 'id'> = {
     name: '',
     salary: '',
-    payments: '', // Простое поле без геттеров/сеттеров
+    payments: '',
     workexp: '',
     whours: 8,
     favorite: false,

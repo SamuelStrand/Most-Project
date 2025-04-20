@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
     styleUrl: './vacancy-page.component.css'
 })
 export class VacancyPageComponent {
-  vacancy$: Observable<Vacancy>; // Используем Observable
+  vacancy$: Observable<Vacancy>;
   hasApplied: boolean = false;
 
   constructor(
@@ -29,8 +29,6 @@ export class VacancyPageComponent {
         return this.vacancyService.getVacancyById(id);
       })
     );
-
-    // Проверяем, подана ли заявка
     this.activatedRoute.params.subscribe(params => {
       const id = +params['id'];
       this.hasApplied = this.applicationService.hasApplied(id);

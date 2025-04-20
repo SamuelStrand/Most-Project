@@ -42,7 +42,6 @@ export class LoginComponent {
       next: (res) => {
         localStorage.setItem('access', res.access);
         localStorage.setItem('refresh', res.refresh);
-        //this.router.navigate(['/resume']); - navigate after login
         this.successMessage = '✅ Успешный вход!';
         this.errorMessage = null;
         console.log('Вход выполнен, токен:', res.access);

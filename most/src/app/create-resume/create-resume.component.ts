@@ -23,8 +23,8 @@ export class CreateResumeComponent implements OnInit {
   }
 
 
-  resumes: any[] = []; // Хранение всех резюме
-  profile: any = null; // Текущее выбранное резюме
+  resumes: any[] = [];
+  profile: any = null;
   newRole: string = '';
   newName: string = '';
   newSalary: string = '';

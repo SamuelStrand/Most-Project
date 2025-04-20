@@ -11,12 +11,6 @@ import { FavoritesComponent } from './favorites/favorites.component';
 import { ApplicationsComponent } from './applications/applications.component';
 import { CreateResumeComponent } from './create-resume/create-resume.component';
 
-
-
-
-
-
-
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },

@@ -14,8 +14,8 @@ import { RouterModule } from '@angular/router';
 
 })
 export class ResumeComponent implements OnInit {
-  resumes: any[] = []; // Хранение всех резюме
-  profile: any = null; // Текущее выбранное резюме
+  resumes: any[] = [];
+  profile: any = null;
   newRole: string = '';
   newName: string = '';
   newSalary: string = '';
@@ -43,43 +43,9 @@ export class ResumeComponent implements OnInit {
   }
 
   loadAllResumes() {
-    // Симуляция загрузки резюме (например, из LocalStorage или базы данных)
-    /*
-    this.resumes = [
-      {
-        id: 1,
-        name: 'Иван Иванов',
-        status: 'Активен',
-        responses: 5,
-        role: 'Frontend-разработчик',
-        lastUpdated: 'Сегодня',
-        stats: { shows: 10, views: 5, invites: 2 },
-        vacancies: 3
-      },
-      {
-        id: 2,
-        name: 'Петр Петров',
-        status: 'В поиске',
-        responses: 2,
-        role: 'Backend-разработчик',
-        lastUpdated: 'Вчера',
-        stats: { shows: 7, views: 3, invites: 1 },
-        vacancies: 2
-      }
-    ];
-    */
     const storedResumes = localStorage.getItem('resumes');
     this.resumes = storedResumes ? JSON.parse(storedResumes) : [];
   }
-
-
-  //ngOnInit(): void {
-  //  this.resumeService.getResumes().subscribe(resumes => {
-  //    this.resumes = resumes;
-  //    this.profile = resumes.length ? resumes[0] : null;
-  //  });
-  //}
-
   addResume() {
     if (!this.newRole.trim()) {
       alert('Введите роль перед добавлением резюме!');
@@ -91,7 +57,7 @@ export class ResumeComponent implements OnInit {
       name: this.newName,
       status: 'В поиске',
       responses: 0,
-      role: this.newRole, // Используем введенную роль
+      role: this.newRole,
       lastUpdated: new Date().toLocaleDateString(),
       salary: this.newSalary,
       
@@ -104,7 +70,7 @@ export class ResumeComponent implements OnInit {
 
     this.resumes.push(newResume);
     this.saveResumes();
-    this.newRole = ''; // Очищаем поле ввода
+    this.newRole = '';
   }
 
   saveResumes() {
@@ -121,7 +87,7 @@ export class ResumeComponent implements OnInit {
 
   deleteResume(id: number) {
     this.resumes = this.resumes.filter(resume => resume.id !== id);
-    this.saveResumes(); // Сохранение изменений в localStorage
+    this.saveResumes();
   }
 
 }
