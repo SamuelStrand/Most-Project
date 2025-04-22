@@ -1,58 +1,67 @@
 from rest_framework import serializers
-from django.contrib.auth import get_user_model, authenticate
-
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework_simplejwt.tokens import RefreshToken
-
-from users.models import Vacancy
-
-User = get_user_model()
+from .models import CustomUser, Vacancy, Application, Favorite, Resume
 
 
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
 
     class Meta:
-        model = User
-        fields = ('username', 'email', 'password')
+        model = CustomUser
+        fields = ('email', 'username', 'password', 'phone', 'age')
 
     def create(self, validated_data):
-        user = User.objects.create_user(
-            username=validated_data['username'],
+        user = CustomUser(
             email=validated_data['email'],
-            password=validated_data['password'],
+            username=validated_data['username'],
+            phone=validated_data.get('phone'),
+            age=validated_data.get('age')
         )
+        user.set_password(validated_data['password'])
+        user.save()
         return user
 
 
+class EmailTokenObtainPairSerializer(TokenObtainPairSerializer):
+    username_field = 'email'
+
 
 class VacancySerializer(serializers.ModelSerializer):
+    creator = serializers.ReadOnlyField(source='creator.id')
+
     class Meta:
         model = Vacancy
-        fields = '__all__' 
-        extra_kwargs = {
-            'whours': {'required': True},
-            'schedule': {'required': True}
-        }
+        fields = '__all__'
 
-class EmailTokenObtainPairSerializer(serializers.Serializer):
-    email = serializers.EmailField()
-    password = serializers.CharField()
+class LogoutSerializer(serializers.Serializer):
+    refresh = serializers.CharField()
 
-    def validate(self, attrs):
-        email = attrs.get("email")
-        password = attrs.get("password")
 
-        user = authenticate(request=self.context.get('request'), email=email, password=password)
+class ApplicationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Application
+        fields = ('id', 'user', 'vacancy', 'applied_at')
+        read_only_fields = ('id', 'user', 'applied_at')
 
-        if not user:
-            raise serializers.ValidationError("Неверный email или пароль")
 
-        refresh = RefreshToken.for_user(user)
+class ApplicationCreateSerializer(serializers.Serializer):
+    vacancy_id = serializers.IntegerField()
 
-        return {
-            'refresh': str(refresh),
-            'access': str(refresh.access_token),
-            'email': user.email,
-            'username': user.username
-        }
+    def create(self, validated_data):
+        user = self.context['request'].user
+        vac = Vacancy.objects.get(pk=validated_data['vacancy_id'])
+        return Application.objects.create(user=user, vacancy=vac)
+
+
+class FavoriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Favorite
+        fields = ('id', 'user', 'vacancy', 'created_at')
+        read_only_fields = ('id', 'user', 'created_at')
+
+
+class ResumeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Resume
+        fields = ('id', 'title', 'summary', 'experience', 'education', 'updated_at')
+        read_only_fields = ('id', 'updated_at')

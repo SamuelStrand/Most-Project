@@ -1,0 +1,362 @@
+{
+  "info": {
+    "name": "Most API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Register",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"user@example.com\",\n  \"username\": \"user1\",\n  \"password\": \"pass1234\",\n  \"phone\": \"87005551234\",\n  \"age\": 25\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/register/",
+          "host": ["{{base_url}}"],
+          "path": ["register", ""]
+        }
+      }
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"pass1234\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/login/",
+          "host": ["{{base_url}}"],
+          "path": ["login", ""]
+        }
+      }
+    },
+    {
+      "name": "Token Obtain",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"pass1234\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/token/",
+          "host": ["{{base_url}}"],
+          "path": ["token", ""]
+        }
+      }
+    },
+    {
+      "name": "Token Refresh",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"refresh\": \"{{refresh_token}}\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/token/refresh/",
+          "host": ["{{base_url}}"],
+          "path": ["token","refresh",""]
+        }
+      }
+    },
+    {
+      "name": "Logout",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"refresh\": \"{{refresh_token}}\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/logout/",
+          "host": ["{{base_url}}"],
+          "path": ["logout", ""]
+        }
+      }
+    },
+    {
+      "name": "Get Profile",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/me/",
+          "host": ["{{base_url}}"],
+          "path": ["me", ""]
+        }
+      }
+    },
+    {
+      "name": "List Vacancies",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/vacancies/",
+          "host": ["{{base_url}}"],
+          "path": ["vacancies", ""]
+        }
+      }
+    },
+    {
+      "name": "Create Vacancy",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Backend Developer\",\n  \"salary\": \"2000\",\n  \"payments\": \"monthly\",\n  \"workexp\": \"1 year\",\n  \"schedule\": 5,\n  \"whours\": 40,\n  \"wformat\": \"full-time\",\n  \"imageUrl\": \"http://example.com/logo.png\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/vacancies/",
+          "host": ["{{base_url}}"],
+          "path": ["vacancies", ""]
+        }
+      }
+    },
+    {
+      "name": "Get Vacancy",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/vacancies/{{vacancy_id}}/",
+          "host": ["{{base_url}}"],
+          "path": ["vacancies","{{vacancy_id}}",""]
+        }
+      }
+    },
+    {
+      "name": "Update Vacancy",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Senior Backend Developer\",\n  \"salary\": \"3000\",\n  \"payments\": \"monthly\",\n  \"workexp\": \"3 years\",\n  \"schedule\": 5,\n  \"whours\": 40,\n  \"wformat\": \"full-time\",\n  \"imageUrl\": \"http://example.com/logo.png\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/vacancies/{{vacancy_id}}/",
+          "host": ["{{base_url}}"],
+          "path": ["vacancies","{{vacancy_id}}",""]
+        }
+      }
+    },
+    {
+      "name": "Delete Vacancy",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/vacancies/{{vacancy_id}}/",
+          "host": ["{{base_url}}"],
+          "path": ["vacancies","{{vacancy_id}}",""]
+        }
+      }
+    },
+    {
+      "name": "List Applications",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/applications/",
+          "host": ["{{base_url}}"],
+          "path": ["applications", ""]
+        }
+      }
+    },
+    {
+      "name": "Create Application",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"vacancy_id\": {{vacancy_id}}\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/applications/",
+          "host": ["{{base_url}}"],
+          "path": ["applications", ""]
+        }
+      }
+    },
+    {
+      "name": "Delete Application",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/applications/{{application_id}}/",
+          "host": ["{{base_url}}"],
+          "path": ["applications","{{application_id}}",""]
+        }
+      }
+    },
+    {
+      "name": "List Favorites",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/favorites/",
+          "host": ["{{base_url}}"],
+          "path": ["favorites", ""]
+        }
+      }
+    },
+    {
+      "name": "Create Favorite",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"vacancy\": {{vacancy_id}}\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/favorites/",
+          "host": ["{{base_url}}"],
+          "path": ["favorites", ""]
+        }
+      }
+    },
+    {
+      "name": "Delete Favorite",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/favorites/{{favorite_id}}/",
+          "host": ["{{base_url}}"],
+          "path": ["favorites","{{favorite_id}}",""]
+        }
+      }
+    },
+    {
+      "name": "Get Resume",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/resumes/",
+          "host": ["{{base_url}}"],
+          "path": ["resumes", ""]
+        }
+      }
+    },
+    {
+      "name": "Create Resume",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Senior Developer\",\n  \"summary\": \"Experienced backend dev...\",\n  \"experience\": \"5 years at X...\",\n  \"education\": \"Bachelor in CS\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/resumes/",
+          "host": ["{{base_url}}"],
+          "path": ["resumes", ""]
+        }
+      }
+    },
+    {
+      "name": "Update Resume",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Lead Developer\",\n  \"summary\": \"10 years of experience...\",\n  \"experience\": \"Projects at Y and Z...\",\n  \"education\": \"MSc in CS\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/resumes/{{resume_id}}/",
+          "host": ["{{base_url}}"],
+          "path": ["resumes","{{resume_id}}",""]
+        }
+      }
+    },
+    {
+      "name": "Delete Resume",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{access_token}}" }
+        ],
+        "url": {
+          "raw": "{{base_url}}/resumes/{{resume_id}}/",
+          "host": ["{{base_url}}"],
+          "path": ["resumes","{{resume_id}}",""]
+        }
+      }
+    }
+  ],
+  "variable": [
+    { "key": "base_url", "value": "http://localhost:8000/api" },
+    { "key": "access_token", "value": "" },
+    { "key": "refresh_token", "value": "" },
+    { "key": "vacancy_id", "value": "" },
+    { "key": "application_id", "value": "" },
+    { "key": "favorite_id", "value": "" },
+    { "key": "resume_id", "value": "" }
+  ]
+}
