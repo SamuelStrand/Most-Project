@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-login',
@@ -41,10 +42,10 @@ export class LoginComponent {
     }).subscribe({
       next: (res) => {
         localStorage.setItem('access', res.access);
-        localStorage.setItem('refresh', res.refresh);
-        this.successMessage = '✅ Успешный вход!';
-        this.errorMessage = null;
-        console.log('Вход выполнен, токен:', res.access);
+    localStorage.setItem('refresh', res.refresh);
+    this.authService.loginSuccess(); // ✅ Сообщаем, что пользователь вошёл
+    this.router.navigate(['/resume']);
+
       },
       error: (err) => {
         this.errorMessage = err.error?.detail || 'Неверный email или пароль';

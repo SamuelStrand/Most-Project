@@ -6,13 +6,13 @@
   <div class="nav-links">
     <a routerLink="/home">Vacancies</a>
     <a routerLink="/favorites">Favorites</a>
-    <a routerLink="/resume">Profile</a>
-    <a routerLink="/login">Login</a>
-    <a routerLink="/register">Register</a>
-    <a routerLink="/create-vacancy" class="create-btn">Create Vacancy</a>
-    <a routerLink="/applications">My Applications</a>
-
-
+    <a *ngIf="loggedIn" routerLink="/resume">Profile</a>
+    <a *ngIf="!loggedIn" routerLink="/login">Login</a>
+    <a *ngIf="!loggedIn" routerLink="/register">Register</a>
+    <a *ngIf="loggedIn" routerLink="/create-vacancy" class="create-btn">Create Vacancy</a>
+    <a *ngIf="loggedIn" routerLink="/applications">My Applications</a>
+    
+  <a *ngIf="loggedIn" (click)="logout()" style="cursor: pointer">Logout</a>
   </div>
 
   <div class="search">
