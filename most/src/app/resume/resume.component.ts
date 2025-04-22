@@ -3,6 +3,9 @@ import { ResumeService, Resume } from '../services/resume.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
+
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -22,12 +25,13 @@ export class ResumeComponent implements OnInit {
   newWorkExperience: string = '';
   newWorkHours: string = '';  
   newImageURL: string = 'https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D';
+  
 
   ngOnInit() {
     this.loadLastResume();
   }
 
-  constructor(private resumeService: ResumeService) {
+  constructor(private resumeService: ResumeService, private authService: AuthService, private router: Router) {
     this.loadAllResumes();
   }
 
@@ -89,5 +93,4 @@ export class ResumeComponent implements OnInit {
     this.resumes = this.resumes.filter(resume => resume.id !== id);
     this.saveResumes();
   }
-
 }
