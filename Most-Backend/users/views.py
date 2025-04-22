@@ -46,6 +46,7 @@ def vacancy_list(request):
     if request.method == 'GET':
         vacancies = Vacancy.objects.all()
         serializer = VacancySerializer(vacancies, many=True)
+        
         return Response(serializer.data)
 
     serializer = VacancySerializer(data=request.data)

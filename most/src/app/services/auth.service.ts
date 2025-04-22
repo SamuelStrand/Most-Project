@@ -48,4 +48,9 @@ export class AuthService {
       }
     });
   }
+
+  refreshToken(): Observable<{ access: string }> {
+    const refresh = localStorage.getItem('refresh');
+    return this.http.post<{ access: string }>('http://localhost:8000/api/token/refresh/', { refresh });
+  }
 }
