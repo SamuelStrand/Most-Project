@@ -2,10 +2,12 @@
     <div *ngIf="isLoading" class="loading-spinner">
         Loading...
     </div>
+    
     <div *ngIf="resume && !isLoading">
         <h1>Your Resume</h1>
         <div *ngIf="!isEditing" class="resume-view">
             <h2>{{ resume.title }}</h2>
+            
             <div class="resume-section">
                 <h3>Summary</h3>
                 <p>{{ resume.summary }}</p>
@@ -21,11 +23,11 @@
                 <p>{{ resume.education }}</p>
             </div>
             
-            <button (click)="toggleEdit()" class="edit-button">Edit Resume</button>
+            <div class="buttons">
+                <button (click)="toggleEdit()" class="edit-button">Edit Resume</button>
+                <button (click)="deleteResume()" [disabled]="isLoading" class="delete-button">Delete Resume</button>
+            </div>
         </div>
-        <button *ngIf="resume" (click)="deleteResume()" [disabled]="isLoading" class="btn btn-danger">
-            Delete Resume
-          </button>
     
         <form *ngIf="isEditing" (ngSubmit)="updateResume()" class="resume-form">
             <div class="form-group">
@@ -49,22 +51,17 @@
             </div>
             
             <div class="form-actions">
-                <button type="submit" [disabled]="isLoading || formData.title.length < 3 || !formData.summary">
-                    Save Changes
-                </button>
-                <button type="button" (click)="toggleEdit()" [disabled]="isLoading">
-                    Cancel
-                </button>
+                <button type="submit" class="save-button" [disabled]="isLoading || formData.title.length < 3 || !formData.summary">Save Changes</button>
+                <button type="button" (click)="toggleEdit()" class="cancel-button" [disabled]="isLoading">Cancel</button>
             </div>
         </form>
     </div>
+    
     <div *ngIf="!resume && !isLoading">
         <h1>Create Your Resume</h1>
-        <p>You don't have a resume yet. Create one to start applying for jobs!</p>
+        <p class="no-resume-message">You don't have a resume yet. Create one to start applying for jobs!</p>
         
-        <button *ngIf="!isEditing" (click)="toggleCreateForm()" class="create-button">
-            Create Resume
-        </button>
+        <button *ngIf="!isEditing" (click)="toggleCreateForm()" class="create-button">Create Resume</button>
         
         <form *ngIf="isEditing" (ngSubmit)="submitForm()" class="resume-form">
             <div class="form-group">
@@ -88,17 +85,12 @@
             </div>
             
             <div class="form-actions">
-                <button type="submit" [disabled]="isLoading || formData.title.length < 3 || !formData.summary">
-                    Create Resume
-                </button>
-                <button type="button" (click)="isEditing = false" [disabled]="isLoading">
-                    Cancel
-                </button>
-                
+                <button type="submit" class="create-button" [disabled]="isLoading || formData.title.length < 3 || !formData.summary">Create Resume</button>
+                <button type="button" (click)="isEditing = false" class="cancel-button" [disabled]="isLoading">Cancel</button>
             </div>
-            
         </form>
     </div>
+    
     <div class="error-message" *ngIf="errorMessage">
         <p>{{ errorMessage }}</p>
     </div>

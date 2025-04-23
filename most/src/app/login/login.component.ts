@@ -31,7 +31,7 @@ export class LoginComponent {
 
   submit(): void {
     if (this.form.invalid) {
-      this.errorMessage = 'Пожалуйста, заполните все поля корректно';
+      this.errorMessage = 'Please fill in all fields correctly';
       return;
     }
 
@@ -43,15 +43,15 @@ export class LoginComponent {
       next: (res) => {
         localStorage.setItem('access', res.access);
     localStorage.setItem('refresh', res.refresh);
-    this.authService.loginSuccess(); // ✅ Сообщаем, что пользователь вошёл
+    this.authService.loginSuccess();
     this.router.navigate(['/resume']);
 
       },
       error: (err) => {
-        this.errorMessage = err.error?.detail || 'Неверный email или пароль';
+        this.errorMessage = err.error?.detail || 'Invalid email or password';
         
       this.successMessage = null;
-      this.errorMessage = err.error?.detail || 'Неверный email или пароль';
+      this.errorMessage = err.error?.detail || 'Invalid email or password';
       }
     });
   }

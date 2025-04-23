@@ -45,18 +45,18 @@ export class RegisterComponent implements OnInit {
       password
     }).subscribe({
       next: () => {
-        this.successMessage = 'Регистрация прошла успешно!';
+        this.successMessage = 'Registration was successful!';
         this.errorMessage = null;
         setTimeout(() => this.router.navigate(['/login']), 1500);
       },
       error: (err) => {
         this.successMessage = null;
-        console.error('Ошибка:', err);
+        console.error('error', err);
         this.errorMessage =
           err.error?.email?.[0] ||
           err.error?.username?.[0] ||
           err.error?.password?.[0] ||
-          'Ошибка регистрации';
+          'Registration error';
       }
     });
   }

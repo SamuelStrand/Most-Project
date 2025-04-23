@@ -33,17 +33,17 @@ export class CreateVacancyComponent {
     if (this.newVacancy.name && this.newVacancy.salary) {
       this.vacancyService.createVacancy(this.newVacancy).subscribe({
         next: (response) => {
-          console.log('Вакансия создана:', response);
-          alert('Вакансия успешно добавлена!');
+          console.log('Vacancy created: ', response);
+          alert('Vacancy successfully added!');
           this.router.navigate(['/']);
         },
         error: (err) => {
-          console.error('Ошибка:', err);
-          alert('Ошибка при создании вакансии: ' + err.error?.message);
+          console.error('Error ', err);
+          alert('Error when creating a vacancy:' + err.error?.message);
         }
       });
     } else {
-      alert('Заполните обязательные поля: название и зарплата');
+      alert('Fill in the mandatory fields: title and salary');
     }
   }
 }

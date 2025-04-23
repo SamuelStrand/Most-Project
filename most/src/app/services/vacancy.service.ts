@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class VacancyService {
   private apiUrl = 'http://localhost:8000/api/vacancies/';
+  private favoriteEndpoint = 'http://localhost:8000/api/favorites/';
 
   constructor(private http: HttpClient) {}
 
@@ -33,7 +34,7 @@ export class VacancyService {
   }
 
   updateVacancy(vacancy: Vacancy): Observable<Vacancy> {
-    return this.http.patch<Vacancy>(`${this.apiUrl}${vacancy.id}/`, vacancy, this.getAuthHeaders());
+    return this.http.put<Vacancy>(`${this.apiUrl}${vacancy.id}/`, vacancy, this.getAuthHeaders());
   }
 
   deleteVacancy(id: number): Observable<void> {
@@ -44,12 +45,23 @@ export class VacancyService {
     return this.http.get<Vacancy[]>(`${this.apiUrl}?search=${term}`, this.getAuthHeaders());
   }
 
-  // Можно реализовать позже
-  getFavorites(): any[] {
-    throw new Error('Method not implemented.');
+  getFavorites(): Observable<any[]> {
+    return this.http.get<any[]>(this.favoriteEndpoint, this.getAuthHeaders());
   }
-
-  toggleFavorite(id: number): void {
-    throw new Error('Method not implemented.');
+  
+  addToFavorites(vacancyId: number): Observable<any> {
+    return this.http.post<any>(this.favoriteEndpoint, { vacancy: vacancyId }, this.getAuthHeaders());
+  }
+  
+  removeFromFavorites(favoriteId: number): Observable<void> {
+    return this.http.delete<void>(`${this.favoriteEndpoint}${favoriteId}/`, this.getAuthHeaders());
+  }
+  
+  toggleFavorite(vacancyId: number, isFavorite: boolean, favoriteId?: number): Observable<any> {
+    if (isFavorite && favoriteId) {
+      return this.removeFromFavorites(favoriteId);
+    } else {
+      return this.addToFavorites(vacancyId);
+    }
   }
 }

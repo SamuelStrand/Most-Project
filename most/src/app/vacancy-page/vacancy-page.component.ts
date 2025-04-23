@@ -16,7 +16,8 @@ import { CommonModule } from '@angular/common';
 export class VacancyPageComponent {
   vacancy$: Observable<Vacancy>;
   hasApplied: boolean = false;
-
+  favorites: any[] = [];
+  favoriteId: number | null = null;
   constructor(
     private activatedRoute: ActivatedRoute,
     private vacancyService: VacancyService,
@@ -34,7 +35,40 @@ export class VacancyPageComponent {
       this.hasApplied = this.applicationService.hasApplied(id);
     });
   }
-
+  ngOnInit() {
+    this.loadFavorites();
+  }
+  loadFavorites() {
+    this.vacancyService.getFavorites().subscribe(favorites => {
+      this.favorites = favorites;
+      this.vacancy$.subscribe(vacancy => {
+        const favorite = this.favorites.find(f => f.vacancy.id === vacancy.id);
+        if (favorite) {
+          this.favoriteId = favorite.id;
+        }
+      });
+    });
+  }
+  
+  toggleFavorite(vacancy: Vacancy, event: Event) {
+    event.stopPropagation();
+    event.preventDefault();
+    
+    const isFavorite = !!this.favoriteId;
+    
+    this.vacancyService.toggleFavorite(vacancy.id, isFavorite, this.favoriteId || undefined).subscribe({
+      next: (response) => {
+        if (isFavorite) {
+          this.favoriteId = null;
+        } else {
+          this.favoriteId = response.id;
+        }
+      },
+      error: (error) => {
+        console.error('Error toggling favorite:', error);
+      }
+    });
+  }
   applyForVacancy(vacancy: Vacancy) {
     console.log('Applying for:', vacancy);
     if (!this.hasApplied) {

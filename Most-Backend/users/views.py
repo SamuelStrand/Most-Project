@@ -57,7 +57,7 @@ def vacancy_list(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET', 'PUT', 'DELETE'])
+@api_view(['GET', 'PUT', 'PATCH', 'DELETE'])
 def vacancy_detail(request, pk):
     try:
         vacancy = Vacancy.objects.get(pk=pk)

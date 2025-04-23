@@ -1,21 +1,38 @@
 <div class="container">
   <h2>Favorite Vacancies</h2>
   
-  <ul class="vacancies-list" *ngIf="favorites.length; else noFavorites">
-    <li *ngFor="let vacancy of favorites" class="vacancy-item">
-      <a routerLink="/vacancy/{{vacancy.id}}">
+  <div *ngIf="loading" class="loading">
+    <div class="spinner"></div>
+    <p>Loading favorites...</p>
+  </div>
+  
+  <ul class="vacancies-list" *ngIf="favorites.length && !loading; else noFavorites">
+    <li *ngFor="let favorite of favorites" class="vacancy-item">
+      <a [routerLink]="['/vacancy', favorite.vacancy]">
         <div class="vacancy-content">
-          <div class="vacancy-name">{{ vacancy.name }}</div>
+          <div class="vacancy-name">
+            <ng-container *ngIf="vacancyDetails[favorite.vacancy]">
+              {{ vacancyDetails[favorite.vacancy].name }}
+            </ng-container>
+            <ng-container *ngIf="!vacancyDetails[favorite.vacancy]">
+              Vacancy #{{ favorite.vacancy }}
+            </ng-container>
+          </div>
           
-          <button class="favorite active" 
-                  (click)="toggleFavorite(vacancy.id, $event)">
+          <button class="favorite active" (click)="toggleFavorite(favorite.id, $event)">
             ❤️
           </button>
           
           <div class="vacancy-details">
-            <div><span>Salary:</span> {{ vacancy.salary }}</div>
-            <div><span>Schedule:</span> {{ vacancy.schedule }} days on/off</div>
-            <div><span>Format:</span> {{ vacancy.wformat }}</div>
+            <div *ngIf="vacancyDetails[favorite.vacancy]">
+              <div class="detail-row"><span>Salary:</span> {{ vacancyDetails[favorite.vacancy].salary }}</div>
+              <div class="detail-row"><span>Schedule:</span> {{ vacancyDetails[favorite.vacancy].schedule }} days on/off</div>
+              <div class="detail-row"><span>Format:</span> {{ vacancyDetails[favorite.vacancy].wformat }}</div>
+            </div>
+            <div *ngIf="!vacancyDetails[favorite.vacancy]" class="loading-details">
+              <div class="mini-spinner"></div>
+              <p>Loading vacancy details...</p>
+            </div>
           </div>
         </div>
       </a>
@@ -23,6 +40,8 @@
   </ul>
 
   <ng-template #noFavorites>
-    <p class="empty-message">You don't have any favorite vacancies yet</p>
+    <div class="empty-message" *ngIf="!loading">
+      <p>You don't have any favorite vacancies yet</p>
+    </div>
   </ng-template>
 </div>

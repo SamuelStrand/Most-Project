@@ -1,7 +1,10 @@
 <div class="vacancy-detail" *ngIf="vacancy$ | async as vacancy">
   <div class="vacancy-header">
     <h2 class="name">{{ vacancy.name }}</h2>
-    <span class="favorite {{ vacancy.favorite ? 'active' : '' }}">❤️</span>
+<button class="favorite {{ favoriteId ? 'active' : '' }}" 
+(click)="toggleFavorite(vacancy, $event)">
+❤️
+</button>
   </div>
 
   <div class="vacancy-info">
