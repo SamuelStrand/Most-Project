@@ -1,5 +1,5 @@
 # views.py
-
+from django.http import Http404
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import status
@@ -173,22 +173,56 @@ class ResumeListCreateAPIView(APIView):
 
 class ResumeDetailAPIView(APIView):
     permission_classes = [IsAuthenticated]
+    def get_object(self, pk, user):
+        try:
+            return Resume.objects.get(pk=pk, user=user)
+        except Resume.DoesNotExist:
+            raise Http404("Resume not found")
+
+    def get(self, request, pk):
+        resume = self.get_object(pk, request.user)
+        serializer = ResumeSerializer(resume)
+        return Response(serializer.data)
 
     def put(self, request, pk):
         try:
-            res = Resume.objects.get(pk=pk, user=request.user)
+            resume = Resume.objects.get(pk=pk, user=request.user)
         except Resume.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        ser = ResumeSerializer(res, data=request.data)
-        if ser.is_valid():
-            ser.save()
-            return Response(ser.data)
-        return Response(ser.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"detail": "Resume not found"}, status=status.HTTP_404_NOT_FOUND)
+        
+        serializer = ResumeSerializer(resume, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
         try:
-            res = Resume.objects.get(pk=pk, user=request.user)
+            resume = Resume.objects.get(pk=pk, user=request.user)
         except Resume.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        res.delete()
+            return Response({"detail": "Resume not found"}, status=status.HTTP_404_NOT_FOUND)
+        resume.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+class ResumeListCreateAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        try:
+            resume = Resume.objects.get(user=request.user)
+            serializer = ResumeSerializer(resume)
+            return Response(serializer.data)
+        except Resume.DoesNotExist:
+            return Response({"detail": "No resume found"}, status=status.HTTP_404_NOT_FOUND)
+    def post(self, request):
+        if Resume.objects.filter(user=request.user).exists():
+            return Response(
+                {"detail": "Резюме уже существует"}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
+            
+        serializer = ResumeSerializer(data=request.data)
+        if serializer.is_valid():
+            resume = serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

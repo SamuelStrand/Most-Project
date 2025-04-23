@@ -1,11 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+  setTokens(access: string, refresh: string): void {
+    localStorage.setItem('access', access);
+    localStorage.setItem('refresh', refresh);
+  }
+
+  setAccessToken(token: string): void {
+    localStorage.setItem('access', token);
+  }
+
+  getAccessToken(): string | null {
+    return localStorage.getItem('access');
+  }
   private BASE_URL = 'http://localhost:8000/api';
 
   private loggedInSubject = new BehaviorSubject<boolean>(this.hasToken());
@@ -21,14 +33,15 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   register(data: { username: string; email: string; password: string }): Observable<any> {
-    return this.http.post(`${this.BASE_URL}/register/`, data); // ✅ тут return
+    return this.http.post(`${this.BASE_URL}/register/`, data);
   }
 
   login(credentials: { email: string; password: string }): Observable<any> {
-    return this.http.post(`${this.BASE_URL}/login/`, {
-      email: credentials.email,
-      password: credentials.password
-    });
+    return this.http.post(`${this.BASE_URL}/login/`, credentials).pipe(
+      tap((response: any) => {
+        this.setTokens(response.access, response.refresh);
+      })
+    );
   }
   isLoggedIn(): boolean {
     return this.loggedInSubject.value;
@@ -48,9 +61,29 @@ export class AuthService {
       }
     });
   }
-
+  getRefreshToken(): string | null {
+    return localStorage.getItem('refresh');
+  }
   refreshToken(): Observable<{ access: string }> {
-    const refresh = localStorage.getItem('refresh');
-    return this.http.post<{ access: string }>('http://localhost:8000/api/token/refresh/', { refresh });
+    const refresh = this.getRefreshToken();
+    if (!refresh) {
+      this.logout();
+      return throwError(() => new Error('No refresh token'));
+    }
+
+    return this.http.post<{ access: string }>(
+      `${this.BASE_URL}/token/refresh/`,
+      { refresh }
+    ).pipe(
+      tap(response => {
+        console.log('Refresh token response:', response);
+        this.setAccessToken(response.access);
+      }),
+      catchError(error => {
+        console.error('Refresh token error:', error);
+        this.logout();
+        return throwError(() => error);
+      })
+    );
   }
 }

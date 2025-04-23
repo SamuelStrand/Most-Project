@@ -59,9 +59,23 @@ class FavoriteSerializer(serializers.ModelSerializer):
         fields = ('id', 'user', 'vacancy', 'created_at')
         read_only_fields = ('id', 'user', 'created_at')
 
-
 class ResumeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Resume
-        fields = ('id', 'title', 'summary', 'experience', 'education', 'updated_at')
-        read_only_fields = ('id', 'updated_at')
+        fields = ['id', 'title', 'summary', 'experience', 'education']  # Added 'id' to the fields
+        extra_kwargs = {
+            'title': {
+                'required': True,
+                'allow_blank': False,
+                'error_messages': {
+                    'required': 'Поле "Заголовок" обязательно для заполнения',
+                    'blank': 'Поле "Заголовок" не может быть пустым'
+                }
+            },
+            'summary': {
+                'required': True,
+                'error_messages': {
+                    'required': 'Поле "Краткое описание" обязательно для заполнения'
+                }
+            }
+        }

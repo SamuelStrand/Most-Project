@@ -3,94 +3,156 @@ import { ResumeService, Resume } from '../services/resume.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { Router } from '@angular/router';
-
 import { AuthService } from '../services/auth.service';
-
 
 @Component({
   selector: 'app-resume',
   standalone: true,
-  imports: [CommonModule,FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './resume.component.html',
   styleUrls: ['./resume.component.css'],
-
 })
 export class ResumeComponent implements OnInit {
-  resumes: any[] = [];
-  profile: any = null;
-  newRole: string = '';
-  newName: string = '';
-  newSalary: string = '';
-  newWorkExperience: string = '';
-  newWorkHours: string = '';  
-  newImageURL: string = 'https://plus.unsplash.com/premium_photo-1664474619075-644dd191935f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW1hZ2V8ZW58MHx8MHx8fDA%3D';
-  
+  isLoading = false;
+  errorMessage: string | null = null;
+  resume: Resume | null = null;
+  isEditing = false;
+  formData: Resume = {
+    title: '',
+    summary: '',
+    experience: '',
+    education: ''
+  };
+
+  constructor(
+    private resumeService: ResumeService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
-    this.loadLastResume();
+    this.loadResume();
   }
 
-  constructor(private resumeService: ResumeService, private authService: AuthService, private router: Router) {
-    this.loadAllResumes();
+  toggleCreateForm() {
+    this.isEditing = !this.isEditing;
+    if (this.isEditing) {
+      this.formData = {
+        title: '',
+        summary: '',
+        experience: '',
+        education: ''
+      };
+    }
   }
 
-
-  private showLastOnly = false;
-
-
-  loadLastResume() {
-    const storedResumes = localStorage.getItem('resumes');
-    const resumesArray = storedResumes ? JSON.parse(storedResumes) : [];
-
-    this.resumes = resumesArray.length > 0 ? [resumesArray[resumesArray.length - 1]] : [];
+  toggleEdit() {
+    this.isEditing = !this.isEditing;
+    if (this.isEditing && this.resume) {
+      this.formData = { ...this.resume };
+    }
   }
 
-  loadAllResumes() {
-    const storedResumes = localStorage.getItem('resumes');
-    this.resumes = storedResumes ? JSON.parse(storedResumes) : [];
+  submitForm() {
+    this.isLoading = true;
+    this.errorMessage = null;
+
+    console.log('Sending resume data:', this.formData);
+
+    this.resumeService.createResume(this.formData).subscribe({
+      next: (newResume) => {
+        console.log('Resume created successfully:', newResume);
+        this.resume = newResume;
+        this.isEditing = false;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error('Error creating resume:', err);
+        this.isLoading = false;
+        
+        if (typeof err === 'string') {
+          this.errorMessage = err;
+        } else if (err.error && typeof err.error === 'object') {
+          let errorMsg = '';
+          for (const field in err.error) {
+            if (err.error.hasOwnProperty(field)) {
+              errorMsg += `${field}: ${err.error[field].join(', ')}\n`;
+            }
+          }
+          this.errorMessage = errorMsg || 'Form validation error';
+        } else if (err.status === 400 && err.error?.detail) {
+          this.errorMessage = err.error.detail;
+        } else {
+          this.errorMessage = 'An error occurred. Please try again later.';
+        }
+      }
+    });
   }
-  addResume() {
-    if (!this.newRole.trim()) {
-      alert('Введите роль перед добавлением резюме!');
+  
+  updateResume() {
+    this.isLoading = true;
+    this.errorMessage = null;
+    
+    if (!this.resume || !this.resume.id) {
+      this.errorMessage = 'Cannot update: Resume ID not found';
+      this.isLoading = false;
       return;
     }
-
-    const newResume = {
-      id: Date.now(),
-      name: this.newName,
-      status: 'В поиске',
-      responses: 0,
-      role: this.newRole,
-      lastUpdated: new Date().toLocaleDateString(),
-      salary: this.newSalary,
-      
-      workExperience: this.newWorkExperience,
-      workHours: this.newWorkHours,
-      imageURL: this.newImageURL,
-      stats: { shows: 0, views: 0, invites: 0 },
-      vacancies: 0
-    };
-
-    this.resumes.push(newResume);
-    this.saveResumes();
-    this.newRole = '';
+    
+    this.resumeService.updateResume(this.resume.id, this.formData).subscribe({
+      next: (updatedResume) => {
+        console.log('Resume updated successfully:', updatedResume);
+        this.resume = updatedResume;
+        this.isEditing = false;
+        this.isLoading = false;
+      },
+      error: (err) => {
+      }
+    });
   }
 
-  saveResumes() {
-    localStorage.setItem('resumes', JSON.stringify(this.resumes));
+  loadResume() {
+    this.isLoading = true;
+    this.resumeService.getMyResume().subscribe({
+      next: (res) => {
+        console.log('Resume loaded:', res);
+        this.resume = res;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.log('Resume load error:', err);
+        this.isLoading = false;
+        if (err.status === 404) {
+          this.resume = null;
+        } else {
+          this.errorMessage = 'Failed to load resume';
+        }
+      }
+    });
   }
-
-
-  updateResume(id: number): void {
-    if (this.profile) {
-      this.profile.lastUpdated = new Date().toISOString().split('T')[0];
-      this.resumeService.updateResume(this.profile);
+  deleteResume() {
+    if (!this.resume || !this.resume.id) {
+      this.errorMessage = 'Cannot delete: Resume ID not found';
+      return;
     }
-  }
-
-  deleteResume(id: number) {
-    this.resumes = this.resumes.filter(resume => resume.id !== id);
-    this.saveResumes();
+  
+    if (confirm('Are you sure you want to delete your resume?')) {
+      this.isLoading = true;
+      this.resumeService.deleteResume(this.resume.id).subscribe({
+        next: () => {
+          console.log('Resume deleted successfully');
+          this.resume = null;
+          this.isLoading = false;
+        },
+        error: (err) => {
+          console.error('Error deleting resume:', err);
+          this.isLoading = false;
+          if (err.status === 401) {
+            this.errorMessage = 'Authentication failed. Please log in again.';
+          } else {
+            this.errorMessage = 'Failed to delete resume. Please try again later.';
+          }
+        }
+      });
+    }
   }
 }

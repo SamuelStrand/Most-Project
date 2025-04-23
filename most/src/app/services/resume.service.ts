@@ -1,60 +1,88 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, delay, Observable, switchMap, tap, throwError } from 'rxjs';
+import { AuthService } from './auth.service';
 
 export interface Resume {
-  id: number;
-  name: string;
-  status: string;
-  responses: number;
-  role: string;
-  lastUpdated: string;
-  stats: {
-    shows: number;
-    views: number;
-    invites: number;
-  };
-  vacancies: number;
+  id?: number;
+  user?: number;
+  title: string;
+  summary: string;
+  experience: string;
+  education: string;
+  updated_at?: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class ResumeService {
-  private resumes: Resume[] = [
-    {
-      id: 1,
-      name: 'Иван Петров',
-      status: 'Активен',
-      responses: 5,
-      role: 'Frontend-разработчик',
-      lastUpdated: '2025-03-27',
-      stats: { shows: 50, views: 20, invites: 5 },
-      vacancies: 10
-    }
-  ];
+  private apiUrl = 'http://localhost:8000/api/resumes/';
 
-  private resumesSubject = new BehaviorSubject<Resume[]>(this.resumes);
-  resumes$ = this.resumesSubject.asObservable();
+  constructor(private http: HttpClient,  private authService: AuthService) {}
 
   getResumes(): Observable<Resume[]> {
-    return this.resumes$;
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.authService.getAccessToken()}`
+    });
+    return this.http.get<Resume[]>(this.apiUrl, { headers });
   }
 
-  addResume(resume: Resume): void {
-    this.resumes.push(resume);
-    this.resumesSubject.next([...this.resumes]); // Обновляем подписчиков
+  getMyResume(): Observable<Resume> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.authService.getAccessToken()}`
+    });
+  
+    return this.http.get<Resume>(`${this.apiUrl}me/`, { headers }).pipe(
+      tap(response => console.log('Raw response from getMyResume:', response)),
+      catchError(error => {
+        console.error('Error getting resume:', error);
+        if (error.status === 401) {
+          return this.authService.refreshToken().pipe(
+            switchMap(() => this.getMyResume())
+          );
+        }
+        return throwError(() => error);
+      })
+    );
   }
 
-  updateResume(resume: Resume): void {
-    const index = this.resumes.findIndex(r => r.id === resume.id);
-    if (index !== -1) {
-      this.resumes[index] = resume;
-      this.resumesSubject.next([...this.resumes]);
-    }
+  createResume(resume: Resume): Observable<Resume> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.authService.getAccessToken()}`,
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.post<Resume>(this.apiUrl, resume, { headers }).pipe(
+      catchError(error => {
+        console.error('Create resume error:', error);
+        return throwError(() => error);
+      })
+    );
   }
 
-  deleteResume(id: number): void {
-    this.resumes = this.resumes.filter(resume => resume.id !== id);
-    this.resumesSubject.next([...this.resumes]);
+
+  updateResume(id: number, resume: Resume): Observable<Resume> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.authService.getAccessToken()}`,
+      'Content-Type': 'application/json'
+    });
+
+    console.log(`Sending PUT request to ${this.apiUrl}${id}/`);
+    console.log('Update data:', resume);
+
+    return this.http.put<Resume>(`${this.apiUrl}${id}/`, resume, { headers }).pipe(
+      catchError(error => {
+        console.error('Update resume error:', error);
+        return throwError(() => error);
+      })
+    );
+  }
+
+  deleteResume(id: number): Observable<void> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.authService.getAccessToken()}`
+    });
+    return this.http.delete<void>(`${this.apiUrl}${id}/`, { headers });
   }
 }

@@ -1,147 +1,112 @@
 .resume-container {
   max-width: 800px;
-  margin: 40px auto;
+  margin: 0 auto;
   padding: 20px;
-  border-radius: 10px;
-  background-color: #ffffff;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;
 }
 
-.resume-container h1 {
-  text-align: center;
+h1 {
   color: #333;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
 }
 
-
-.profile-card {
-  display: flex;
-  align-items: center;
-  background: #f8f9fa;
-  padding: 15px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  gap: 15px;
+.resume-view {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
 }
 
-
-.profile-info {
-  display: flex;
-  align-items: center;
+.resume-section {
+  margin-bottom: 20px;
 }
 
-.profile-pic {
-  width: 80px; 
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #ddd;
-}
-
-
-.resume-details {
-  background: #ffffff;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
-}
-
-.resume-details h2 {
-  color: #007bff;
-  font-size: 18px;
-  margin-bottom: 5px;
-}
-
-.resume-details p {
+.resume-section h3 {
   color: #555;
-  font-size: 14px;
-  margin: 5px 0;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
 }
 
-
-.stats {
-  background: #e9ecef;
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 14px;
-}
-.new{
-  color:white
-}
-.actions {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 10px;
+.form-group {
+  margin-bottom: 15px;
 }
 
-.actions button {
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
 
+.form-group input, 
+.form-group textarea {
   width: 100%;
-
-
-  background-color: #007bff;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: background 0.3s ease;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
-.actions button:hover {
-  background-color: #0056b3;
-}
-
-
-.actions button:last-of-type {
-  background-color: #dc3545;
-}
-
-.actions button:last-of-type:hover {
-  background-color: #c82333;
-}
-
-
-.resume-container input {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ced4da;
-  border-radius: 5px;
-  margin: 10px 0;
-  font-size: 14px;
-  transition: border 0.3s ease;
-}
-
-.resume-container input:focus {
-  border-color: #007bff;
-  outline: none;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
-}
-
-
-.resume-container .main-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
+.form-actions {
   margin-top: 20px;
+  display: flex;
+  gap: 10px;
 }
 
-.resume-container .main-buttons button {
-  margin: 5px; 
-  background-color: #2f2582;
+button {
+  padding: 8px 16px;
+  background-color: #4CAF50;
   color: white;
-  padding: 12px;
   border: none;
-  border-radius: 7px;
+  border-radius: 4px;
   cursor: pointer;
-  font-size: 16px;
-  transition: background 0.3s ease;
-  text-align: center;
 }
 
-.resume-container button:hover {
-  background-color: #382e92;
+button:hover {
+  background-color: #45a049;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+button[type="button"] {
+  background-color: #f44336;
+}
+
+button[type="button"]:hover {
+  background-color: #d32f2f;
+}
+
+.edit-button {
+  background-color: #2196F3;
+}
+
+.edit-button:hover {
+  background-color: #0b7dda;
+}
+
+.create-button {
+  background-color: #ff9800;
+}
+
+.create-button:hover {
+  background-color: #e68a00;
+}
+
+.loading-spinner {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+}
+
+.error-message {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 20px;
 }
