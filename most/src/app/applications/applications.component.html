@@ -2,26 +2,53 @@
 
 <div *ngIf="applications.length > 0; else noApps" class="applications-list">
   <div *ngFor="let app of applications" class="application-card">
-    <!-- <img [src]="app.vacancy.imageUrl" alt="Vacancy image" /> -->
-    
     <div class="application-info">
       <h3>{{ app.vacancy.name }}</h3>
-      <p><strong>Salary:</strong> {{ app.vacancy.salary }}</p>
-      <p><strong>Payments:</strong> {{ app.vacancy.payments }}</p>
-      <p><strong>Experience:</strong> {{ app.vacancy.workexp }}</p>
-      <p><strong>Schedule:</strong> {{ app.vacancy.schedule }} days/week</p>
-      <p><strong>Hours:</strong> {{ app.vacancy.whours }} hours/week</p>
-      <p><strong>Format:</strong> {{ app.vacancy.wformat }}</p>
+      
+      <div class="details">
+        <div class="detail-item">
+          <span>Salary:</span>
+          {{ app.vacancy.salary }}
+        </div>
+        
+        <div class="detail-item">
+          <span>Payments:</span>
+          {{ app.vacancy.payments }}
+        </div>
+        
+        <div class="detail-item">
+          <span>Experience:</span>
+          {{ app.vacancy.workexp }}
+        </div>
+        
+        <div class="detail-item">
+          <span>Schedule:</span>
+          {{ app.vacancy.schedule }} days/week
+        </div>
+        
+        <div class="detail-item">
+          <span>Hours:</span>
+          {{ app.vacancy.whours }} hours/week
+        </div>
+        
+        <div class="detail-item">
+          <span>Format:</span>
+          {{ app.vacancy.wformat }}
+        </div>
+      </div>
+      
       <p class="applied-date">Applied on: {{ app.applied_at | date:'medium' }}</p>
       
       <div class="application-actions">
         <a [routerLink]="['/vacancy', app.vacancy.id]" class="view-btn">View Details</a>
-        <button (click)="removeApplication(app.id)" class="cancel-btn">Cancel</button>
+        <button (click)="removeApplication(app.id)" class="cancel-btn">Cancel Application</button>
       </div>
     </div>
   </div>
 </div>
 
 <ng-template #noApps>
-  <p>You have not applied to any vacancies yet.</p>
+  <div class="no-applications">
+    <p>You have not applied to any vacancies yet.</p>
+  </div>
 </ng-template>

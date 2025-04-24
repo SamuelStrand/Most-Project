@@ -1,73 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+h2 {
+  color: #2f2fa2;
+  margin-bottom: 24px;
+  font-weight: 600;
+  text-align: center;
+}
+
 .applications-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .application-card {
-    display: flex;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    padding: 15px;
-    gap: 20px;
-  }
-  
-  .application-card img {
-    width: 150px;
-    height: auto;
-    border-radius: 8px;
-    object-fit: cover;
-  }
-  
-  .application-info {
-    flex: 1;
-  }
-  
-  .application-info h3 {
-    margin-top: 0;
-    margin-bottom: 8px;
-  }
-  
-  .application-info p {
-    margin: 4px 0;
-  }
-  
-  .applied-date {
-    font-size: 0.85rem;
-    color: #888;
-    margin-top: 10px;
-  }
-  
-  .application-actions {
-    margin-top: 15px;
-    display: flex;
-    gap: 10px;
-  }
-  
-  .view-btn,
-  .cancel-btn {
-    padding: 8px 14px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-    text-decoration: none;
-  }
-  
-  .view-btn {
-    background-color: #2f2fa2;
-    color: white;
-  }
-  
-  .cancel-btn {
-    background-color: #f64c72;
-    color: white;
-  }
-  
-  .view-btn:hover,
-  .cancel-btn:hover {
-    opacity: 0.9;
-  }
-  
+  margin-bottom: 20px;
+}
+
+.application-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.application-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.application-info {
+  padding: 20px;
+}
+
+.application-info h3 {
+  color: #2f2fa2;
+  margin-bottom: 16px;
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+.details {
+  margin-bottom: 16px;
+}
+
+.detail-item {
+  background-color: #f4f4ff;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.detail-item span {
+  font-weight: 600;
+  color: #2f2fa2;
+  margin-right: 8px;
+}
+
+.applied-date {
+  font-size: 0.85rem;
+  color: #888;
+  margin: 16px 0;
+}
+
+.application-actions {
+  margin-top: 16px;
+}
+
+.view-btn, .cancel-btn, .browse-btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+  margin-right: 12px;
+  margin-bottom: 10px;
+}
+
+.view-btn {
+  background-color: #2f2fa2;
+  color: white;
+}
+
+.cancel-btn {
+  background-color: #f64c72;
+  color: white;
+}
+
+.browse-btn {
+  background-color: #28a745;
+  color: white;
+  margin-top: 16px;
+}
+
+.view-btn:hover, .browse-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.cancel-btn:hover {
+  background-color: #e13e64;
+  transform: translateY(-2px);
+}
+
+.no-applications {
+  text-align: center;
+  padding: 40px 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.no-applications p {
+  color: #888;
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}

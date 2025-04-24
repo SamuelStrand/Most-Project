@@ -217,7 +217,7 @@ class ResumeListCreateAPIView(APIView):
     def post(self, request):
         if Resume.objects.filter(user=request.user).exists():
             return Response(
-                {"detail": "Резюме уже существует"}, 
+                {"detail": "The resume already exists"}, 
                 status=status.HTTP_400_BAD_REQUEST
             )
             

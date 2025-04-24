@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApplicationService } from '../services/application.service';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router'; // ← вот это
+import { RouterModule } from '@angular/router';
 @Component({
   imports: [CommonModule, RouterModule],
   selector: 'app-applications',
@@ -28,7 +28,7 @@ export class MyApplicationsComponent implements OnInit {
   apply(vacancyId: number): void {
     this.applicationService.createApplication(vacancyId).subscribe(response => {
       console.log('Application created:', response);
-      this.ngOnInit(); // перезагружаем
+      this.ngOnInit();
     });
   }
 }

@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
 
   submit(): void {
     if (this.form.invalid || this.form.value.password !== this.form.value.confirmPassword) {
-      this.errorMessage = 'Форма некорректна или пароли не совпадают.';
+      this.errorMessage = 'Form is incorrect or passwords do not match';
       return;
     }
 
