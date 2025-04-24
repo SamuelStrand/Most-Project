@@ -32,7 +32,9 @@ export class VacancyPageComponent {
     );
     this.activatedRoute.params.subscribe(params => {
       const id = +params['id'];
-      this.hasApplied = this.applicationService.hasApplied(id);
+      this.applicationService.hasApplied(id).subscribe(result => {
+        this.hasApplied = result;
+      });
     });
   }
   ngOnInit() {
@@ -70,11 +72,15 @@ export class VacancyPageComponent {
     });
   }
   applyForVacancy(vacancy: Vacancy) {
-    console.log('Applying for:', vacancy);
     if (!this.hasApplied) {
-      this.applicationService.applyForVacancy(vacancy);
-      console.log('After apply:', this.applicationService.getApplications());
-      this.hasApplied = true;
+      this.applicationService.applyForVacancy(vacancy.id).subscribe({
+        next: () => {
+          this.hasApplied = true;
+        },
+        error: (err) => {
+          console.error('Ошибка при отклике:', err);
+        }
+      });
     }
   }
 

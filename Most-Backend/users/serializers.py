@@ -38,6 +38,7 @@ class LogoutSerializer(serializers.Serializer):
 
 
 class ApplicationSerializer(serializers.ModelSerializer):
+    vacancy = VacancySerializer(read_only=True)  # ← заменить id на всю вакансию
     class Meta:
         model = Application
         fields = ('id', 'user', 'vacancy', 'applied_at')

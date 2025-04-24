@@ -1,47 +1,50 @@
 import { Injectable } from '@angular/core';
-import { Vacancy } from '../shared/models/vacancy';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { map, Observable } from 'rxjs';
+
+const API_URL = 'http://localhost:8000/api'; // замени на свой
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApplicationService {
-  private applicationsKey = 'job_applications';
-  private applications: Vacancy[] = [];
+  constructor(private http: HttpClient) {}
 
-  constructor() {
-    this.loadApplications();
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('access'); // или откуда ты хранишь токен
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
   }
 
-  private loadApplications(): void {
-    const storedApplications = localStorage.getItem(this.applicationsKey);
-    this.applications = storedApplications ? JSON.parse(storedApplications) : [];
+  getApplications(): Observable<any> {
+    return this.http.get(`${API_URL}/applications/`, {
+      headers: this.getAuthHeaders()
+    });
   }
 
-  private saveApplications(): void {
-    localStorage.setItem(this.applicationsKey, JSON.stringify(this.applications));
+  createApplication(vacancyId: number): Observable<any> {
+    return this.http.post(`${API_URL}/applications/`, {
+      vacancy_id: vacancyId
+    }, {
+      headers: this.getAuthHeaders().set('Content-Type', 'application/json')
+    });
+  }
+  applyForVacancy(vacancyId: number): Observable<any> {
+    return this.createApplication(vacancyId);
   }
 
-  
-applyForVacancy(vacancy: Vacancy): void {
-  console.log('Applying for vacancy:', vacancy);
-  if (!this.hasApplied(vacancy.id)) {
-    this.applications.push(vacancy);
-    this.saveApplications();
-    console.log('Current applications:', this.applications);
-  }
-}
-
-getApplications(): Vacancy[] {
-  console.log('Getting applications from storage');
-  return [...this.applications];
-}
-
-  hasApplied(vacancyId: number): boolean {
-    return this.applications.some(app => app.id === vacancyId);
+  deleteApplication(applicationId: number): Observable<any> {
+    return this.http.delete(`${API_URL}/applications/${applicationId}/`, {
+      headers: this.getAuthHeaders()
+    });
   }
 
-  removeApplication(vacancyId: number): void {
-    this.applications = this.applications.filter(app => app.id !== vacancyId);
-    this.saveApplications();
+  hasApplied(vacancyId: number): Observable<boolean> {
+    return this.getApplications().pipe(
+      map((applications: any[]) => 
+        applications.some(app => app.vacancy.id === vacancyId)
+      )
+    );
   }
 }

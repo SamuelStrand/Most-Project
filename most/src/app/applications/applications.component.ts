@@ -1,27 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { ApplicationService } from '../services/application.service';
-import { Vacancy } from '../shared/models/vacancy';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router'; // ← вот это
 @Component({
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   selector: 'app-applications',
   templateUrl: './applications.component.html',
   styleUrls: ['./applications.component.css']
 })
-export class ApplicationsComponent implements OnInit {
-  applications: Vacancy[] = [];
+export class MyApplicationsComponent implements OnInit {
+  applications: any[] = [];
 
   constructor(private applicationService: ApplicationService) {}
 
-  ngOnInit() {
-    this.loadApplications();
+  ngOnInit(): void {
+    this.applicationService.getApplications().subscribe(data => {
+      this.applications = data;
+    });
   }
 
-  loadApplications() {
-    this.applications = this.applicationService.getApplications();
+  removeApplication(id: number): void {
+    this.applicationService.deleteApplication(id).subscribe(() => {
+      this.applications = this.applications.filter(app => app.id !== id);
+    });
   }
 
-  refreshApplications() {
-    this.loadApplications();
+  apply(vacancyId: number): void {
+    this.applicationService.createApplication(vacancyId).subscribe(response => {
+      console.log('Application created:', response);
+      this.ngOnInit(); // перезагружаем
+    });
   }
 }
